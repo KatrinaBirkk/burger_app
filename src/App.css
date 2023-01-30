@@ -1,8 +1,8 @@
-.App {
-  text-align: center;
-}
+/* .App {
+  color: #f2f2f3;
+} */
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -35,4 +35,30 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.container {
+  margin: auto;
+  display: flex;
+  height: 88px;
+  top: 40px;
+  border: 2px solid #4c4cff;
+  box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04),
+    0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04),
+    0px 0px 1px rgba(0, 0, 0, 0.04);
+}
+
+.navMenu {
+  margin: auto;
+  margin-top: 16px;
+  display: grid;
+  width: 1280px;
+  height: 56px;
+  grid-template-columns: 178px 178px 730px 178px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  margin-left: 112px;
 }
