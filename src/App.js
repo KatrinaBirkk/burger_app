@@ -7,7 +7,8 @@ import "./menuScreen.css";
 import NavButton from "./components/NavButton";
 import SubMenu from "./components/SubMenu";
 import LogoPicture from "./components/LogoPicture";
-import ProdCard from "./components/ProdCard";
+// import ProdCard from "./components/ProdCard";
+import ProdCards from "./components/ProdCards";
 import {
   BurgerIcon,
   ConstructorElement,
@@ -38,12 +39,13 @@ function App() {
               Соберите бургер
             </h1>
             <SubMenu />
-            <h2 className="text text_type_main-medium mb-6 mt-10">Булки</h2>
+            <ProdCards />
+            {/* <h2 className="text text_type_main-medium mb-6 mt-10">Булки</h2>
             <ProdCard
               title="Название булки"
               price="133"
               iconName={CurrencyIcon}
-            />
+            /> */}
           </div>
           <div className="ingredientsList">
             <div
