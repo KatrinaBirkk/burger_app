@@ -1,6 +1,7 @@
 import ModalOverlay from "./ModalOverlay";
 import ReactDom from "react-dom";
 import { useRef, useEffect } from "react";
+import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const Modal = ({ open, children, onClose }) => {
   const modalRef = useRef(null);
@@ -39,7 +40,6 @@ const Modal = ({ open, children, onClose }) => {
         style={{
           position: "fixed",
           width: 720,
-          height: 718,
           left: "50%",
           top: "50%",
           transform: "translate(-50%, -50%)",
@@ -50,8 +50,22 @@ const Modal = ({ open, children, onClose }) => {
           zIndex: 10,
         }}
       >
-        <p>Order Details window</p>
-        <button onClick={onClose}>X</button>
+        <div
+          className="mt-10 ml-10 mr-10"
+          style={{
+            display: "grid",
+            alignItems: "center",
+            height: 64,
+            gridTemplateColumns: "580px 1fr",
+            gap: 36,
+          }}
+        >
+          <p className="text text_type_main-large" style={{}}>
+            Детали ингредиента
+          </p>
+          <CloseIcon type="primary" onClick={onClose} />
+        </div>
+
         {children}
       </div>
     </>,
