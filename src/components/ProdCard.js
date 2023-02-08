@@ -1,21 +1,13 @@
-// fetch("https://norma.nomoreparties.space/api/ingredients")
-//   .then((res) => res.json())
-//   .then((json) => console.log(json));
-
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import Counter from "./Counter";
+import "../prodCard.css";
 
 const ProdCard = (props) => {
   const { image, name, price } = props;
   return (
-    <div
-      className="mt-6 mb-10 ml-4 mr-3"
-      style={{
-        display: "flex",
-        flexFlow: "column",
-        alignItems: "center",
-      }}
-    >
+    <div className="prodCard">
       <img className="cardPicture" src={image} alt={name}></img>
+      <Counter />
       <div style={{ display: "flex" }} className="mt-1 mb-1">
         <p className="text text_type_digits-default mr-2">{price}</p>
         <CurrencyIcon />
