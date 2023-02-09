@@ -2,8 +2,11 @@ import ProdCard from "./ProdCard";
 import "./prodcards_section.css";
 import SubMenu from "../BurgerConstructor/SubMenu";
 import "./burgerIngredientsContainer.css";
+import PropTypes from "prop-types";
 
 const BurgerIngredients = ({ data }) => {
+  // console.log("ingredients");
+  // console.log(data);
   return (
     <>
       <div className="burgerIngredientsContainer">
@@ -52,6 +55,11 @@ const BurgerIngredients = ({ data }) => {
       </div>
     </>
   );
+};
+
+BurgerIngredients.propTypes = {
+  type: PropTypes.string,
+  _id: PropTypes.number,
 };
 
 export default BurgerIngredients;
