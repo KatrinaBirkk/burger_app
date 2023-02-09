@@ -1,8 +1,8 @@
 .App {
-  text-align: center;
+  color: #f2f2f3;
 }
 
-.App-logo {
+/* .App-logo {
   height: 40vmin;
   pointer-events: none;
 }
@@ -35,4 +35,10 @@
   to {
     transform: rotate(360deg);
   }
+} */
+.menuScreen {
+  display: flex;
+  gap: 40px;
+  width: 1240px;
+  margin: auto;
 }

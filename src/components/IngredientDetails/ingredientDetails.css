@@ -1,0 +1,19 @@
+.ingredientDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+  height: 454px;
+  gap: 16px;
+}
+
+.ingredientDetailsTable {
+  color: #8585ad;
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 120px repeat(3, 112px);
+  grid-template-rows: repeat(2, 1fr);
+  column-gap: 20px;
+  row-gap: 8px;
+  justify-items: center;
+}

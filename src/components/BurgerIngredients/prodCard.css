@@ -1,0 +1,24 @@
+.prodCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 272px;
+  height: 208px;
+  margin-right: 12px;
+  margin-left: 16px;
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+
+.prodCard:nth-child(2n) {
+  margin-right: 16px;
+  margin-left: 12px;
+}
+
+/* display: "flex",
+        flexFlow: "column",
+        alignItems: "center",
+        position: "relative",
+        width: 272,
+        height: 208, */
