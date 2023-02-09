@@ -2,7 +2,11 @@ import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const LogoPicture = () => {
   return (
-    <div className="logo">
+    <div
+      style={{
+        marginLeft: 112,
+      }}
+    >
       <Logo />
     </div>
   );

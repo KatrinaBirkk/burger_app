@@ -1,9 +1,7 @@
 import ProdCard from "./ProdCard";
-import "../prodcards_section.css";
-import SubMenu from "./SubMenu";
-// import { useState } from "react";
-// import Modal from "./Modal";
-// import IngredientDetails from "./IngredientDetails";
+import "./prodcards_section.css";
+import SubMenu from "../BurgerConstructor/SubMenu";
+import "./burgerIngredientsContainer.css";
 
 const BurgerIngredients = ({ data }) => {
   return (

@@ -1,12 +1,11 @@
 import "./App.css";
-import "./navButton.css";
-import "./burgerIngredientsContainer.css";
-import "./ingredientsList.css";
-import "./menuScreen.css";
-import AppHeader from "./components/AppHeader";
-import BurgerIngredients from "./components/BurgerIngredients";
+// import "./navButton.css";
+// import "./BurgerIngredients/burgerIngredientsContainer.css";
+// import "./ingredientsList.css";
+import AppHeader from "./components/AppHeader/AppHeader";
+import BurgerIngredients from "./components/BurgerIngredients/BurgerIngredients";
 
-import BurgerConstructor from "./components/BurgerConstructor";
+import BurgerConstructor from "./components/BurgerConstructor/BurgerConstructor";
 import { useEffect, useState } from "react";
 // import Modal from "./components/Modal";
 // import ModalOverlay from "./components/ModalOverlay";
