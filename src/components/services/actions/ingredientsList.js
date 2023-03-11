@@ -1,0 +1,39 @@
+// import { getIngredientsRequest } from "../API";
+
+export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
+export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
+export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
+export const ADD_INGREDIENT = "ADD_INGREDIENT";
+
+const API_URL = "https://norma.nomoreparties.space/api/ingredients";
+
+export function getIngredients() {
+  return function (dispatch) {
+    dispatch({
+      type: GET_INGREDIENTS_REQUEST,
+    });
+    fetch(API_URL)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        if (res && res.success) {
+          dispatch({
+            type: GET_INGREDIENTS_SUCCESS,
+            items: res.data,
+          });
+        } else {
+          // console.log("ELSE");
+          dispatch({
+            type: GET_INGREDIENTS_FAILED,
+          });
+        }
+      })
+      .catch((err) => {
+        // console.log("catch");
+        // Если сервер не вернул данных, также отправляем экшен об ошибке
+        dispatch({
+          type: GET_INGREDIENTS_FAILED,
+        });
+      });
+  };
+}

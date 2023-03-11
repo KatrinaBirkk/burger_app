@@ -5,9 +5,13 @@ import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { useDrag } from "react-dnd";
+import { store } from "../../components/store";
+import { writeInfo } from "../services/actions/ingredientInfo";
 
-const ProdCard = (props) => {
+const ProdCard = ({ _id, price, name, image, ...items }) => {
   const [isOpen, setIsOpen] = useState(false);
+  // console.log(items);
 
   function openModal() {
     setIsOpen(true);
@@ -17,27 +21,40 @@ const ProdCard = (props) => {
     setIsOpen(false);
   }
 
-  const { image, name, price } = props;
+  const [{ opacity }, ref] = useDrag({
+    type: "ingredients",
+    item: { _id },
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0.5 : 1,
+    }),
+  });
+
+  // const { image, name, price } = props;
+
   return (
     <>
       <Modal open={isOpen} onClose={closeModal} ModalTitle="Детали ингредиента">
-        <IngredientDetails data={props} />
+        <IngredientDetails data={{ _id, name, price, ...items }} />
+        {/* <IngredientDetails /> */}
       </Modal>
-      <div className="prodCard" onClick={openModal}>
-        <img className="cardPicture" src={image} alt={name}></img>
-        <Counter number="1" />
-        <div style={{ display: "flex" }} className="mt-1 mb-1">
-          <p className="text text_type_digits-default mr-2">{price}</p>
-          <CurrencyIcon />
+      <div style={{ opacity }}>
+        <div ref={ref} className="prodCard" onClick={openModal}>
+          {/* <div className="prodCard" onClick={openModal(image, name, price)}> */}
+          <img className="cardPicture" src={image} alt={name}></img>
+          <Counter number="1" />
+          <div style={{ display: "flex" }} className="mt-1 mb-1">
+            <p className="text text_type_digits-default mr-2">{price}</p>
+            <CurrencyIcon />
+          </div>
+          <p
+            className="text text_type_main-default"
+            style={{
+              textAlign: "center",
+            }}
+          >
+            {name}
+          </p>
         </div>
-        <p
-          className="text text_type_main-default"
-          style={{
-            textAlign: "center",
-          }}
-        >
-          {name}
-        </p>
       </div>
     </>
   );

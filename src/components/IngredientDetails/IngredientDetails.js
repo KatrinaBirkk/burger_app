@@ -1,11 +1,32 @@
 import "./ingredientDetails.css";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getInfo } from "../services/actions/ingredientInfo";
+import { store } from "../../components/store";
 
-const IngredientDetails = ({ data }) => {
-  console.log(data);
+const IngredientDetails = (data) => {
+  // const { info } = useSelector((state) => state.items);
+  console.log("__________");
+  console.log(data.data);
+  // const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(getInfo());
+  // }, [dispatch]);
+
+  // console.log(info);
+
+  // const currentState = store.getState();
+  // const info_data = currentState.info.info;
+  // console.log(info);
   return (
     <div className="ingredientDetails">
-      <img className="cardPicture" src={data.image_large} alt={data.name}></img>
-      <p className="text text_type_main-medium">{data.name}</p>
+      <img
+        className="cardPicture"
+        src={data.data.image_large}
+        alt={data.data.name}
+      ></img>
+      <p className="text text_type_main-medium">{data.data.name}</p>
       <div className="ingredientDetailsTable">
         <p className="text text_type_main-small text_color_inactive">
           Калории, ккал
@@ -18,16 +39,16 @@ const IngredientDetails = ({ data }) => {
           Углеводы, г
         </p>
         <p className="text text_type_main-small text_type_digits-default">
-          {data.calories}
+          {data.data.calories}
         </p>
         <p className="text text_type_main-small text_type_digits-default">
-          {data.proteins}
+          {data.data.proteins}
         </p>
         <p className="text text_type_main-small text_type_digits-default">
-          {data.fat}
+          {data.data.fat}
         </p>
         <p className="text text_type_main-small text_type_digits-default">
-          {data.carbohydrates}
+          {data.data.carbohydrates}
         </p>
       </div>
     </div>
