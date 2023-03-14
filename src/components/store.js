@@ -1,6 +1,6 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { itemsReducer } from "./services/reducers/ingredientsList";
-import { ingredientsReducer } from "./services/reducers/constructorList";
+// import { ingredientsReducer } from "./services/reducers/constructorList";
 import { ingredientInfoReducer } from "./services/reducers/ingredientInfo";
 import thunk from "redux-thunk";
 

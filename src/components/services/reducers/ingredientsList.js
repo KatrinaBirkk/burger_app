@@ -3,13 +3,31 @@ import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
   ADD_INGREDIENT,
+  INCREASE_INGREDIENT,
+  DELETE_INGREDIENT,
+  REPLACE_INGREDIENT,
 } from "../actions/ingredientsList";
 
 const initialState = {
   items: [],
   itemsRequest: false,
   itemsFailed: false,
-  ingredients: [],
+  bun: []
+  ingredients: [
+    {
+      calories: 643,
+      carbohydrates: 85,
+      fat: 26,
+      image: "https://code.s3.yandex.net/react/code/bun-01.png",
+      image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
+      image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
+      name: "Флюоресцентная булка R2-D3",
+      price: 988,
+      type: "bun",
+      __v: 1,
+      _id: "60d3b41abdacab0026a733c7",
+    },
+  ],
 };
 
 export const itemsReducer = (state = initialState, action) => {
@@ -31,6 +49,12 @@ export const itemsReducer = (state = initialState, action) => {
     case GET_INGREDIENTS_FAILED: {
       return { ...state, itemsFailed: true, itemsRequest: false };
     }
+    case REPLACE_INGREDIENT: {
+      return {
+        ...state,
+        ingredients: [...state.items.filter((item) => item._id === action._id)],
+      };
+    }
     case ADD_INGREDIENT: {
       return {
         ...state,
@@ -38,6 +62,25 @@ export const itemsReducer = (state = initialState, action) => {
           ...state.ingredients,
           ...state.items.filter((item) => item._id === action._id),
         ],
+      };
+    }
+    case INCREASE_INGREDIENT: {
+      return {
+        ...state,
+        items: [...state.items].map((item) =>
+          item._id === action._id ? { ...item, __v: ++item.__v } : item
+        ),
+      };
+    }
+    case DELETE_INGREDIENT: {
+      return {
+        ...state,
+        ingredients: [...state.ingredients].filter(
+          (item) => item._id !== action._id
+        ),
+        items: [...state.items].map((item) =>
+          item._id === action._id ? { ...item, __v: --item.__v } : item
+        ),
       };
     }
     default: {

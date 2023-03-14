@@ -4,6 +4,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorElement from "./BurgerConstructorElement";
+
 import Modal from "../Modal/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { useMemo } from "react";
@@ -12,7 +13,8 @@ import OrderDetails from "../OrderDetails/OrderDetails";
 import PropTypes from "prop-types";
 import {
   ADD_INGREDIENT,
-  DEL_INGREDIENT,
+  INCREASE_INGREDIENT,
+  REPLACE_INGREDIENT,
 } from "../services/actions/ingredientsList";
 // import { store } from "../../components/store";
 
@@ -25,26 +27,33 @@ const BurgerConstructor = (openModal, isOpen, closeModal) => {
 
   const dispatch = useDispatch();
 
-  const content = useMemo(() => {
-    return ingredients.map((item, index) => {
-      return <BurgerConstructorElement key={index} {...item} />;
-    });
-  }, [ingredients]);
-
-  // console.log(_id)
-
   const moveIngredient = (item) => {
+    // item.type === "bun"
     dispatch({
       type: ADD_INGREDIENT,
       ...item,
     });
+    // : dispatch({
+    //     type: REPLACE_INGREDIENT,
+    //     ...item,
+    //   });
+    dispatch({
+      type: INCREASE_INGREDIENT,
+      ...item,
+    });
   };
+  // const increaseIngredient = (item) => {
+  //   dispatch({
+  //     type: INCREASE_INGREDIENT,
+  //     ...item,
+  //   });
+  // };
 
-  // const [{ isHover }, dropTarget] = useDrop({
   const [, dropTarget] = useDrop({
     accept: "ingredients",
     drop(_id) {
       moveIngredient(_id);
+      // increaseIngredient(_id);
     },
     collect: (monitor) => ({
       isHover: monitor.isOver(),
@@ -54,8 +63,9 @@ const BurgerConstructor = (openModal, isOpen, closeModal) => {
   return (
     <section
       className="ConstructorSection"
+      ref={dropTarget}
       style={{
-        width: 600,
+        marginTop: 100,
         height: 912,
         display: "flex",
         flexDirection: "column",
@@ -64,46 +74,54 @@ const BurgerConstructor = (openModal, isOpen, closeModal) => {
       }}
     >
       <div
-        className="sections"
         style={{
           display: "flex",
           flexDirection: "column",
           alignItems: "end",
-          gap: "16px",
-          marginTop: "100px",
-          marginRight: 16,
+          gap: 16,
         }}
       >
-        <ConstructorElement
-          type="top"
-          isLocked={true}
-          text="Bun"
-          price="1000"
-          // thumbnail={}
-        />
-
+        {ingredients
+          .filter((item) => item.type === "bun")
+          .map((item, index) => (
+            <ConstructorElement
+              thumbnail={item.image}
+              price={item.price}
+              text={item.name}
+              isLocked={true}
+              type="top"
+            />
+          ))}
         <div
-          ref={dropTarget}
           style={{
+            // minHeight: 200,
+            width: 568,
+            height: 464,
+            overflowY: "scroll",
             display: "flex",
             flexDirection: "column",
             gap: "16px",
-            height: 464,
-            width: 500,
-            overflowY: "scroll",
+            alignItems: "center",
           }}
         >
-          {content}
+          {ingredients
+            .filter((item) => item.type !== "bun")
+            .map((item, index) => (
+              <BurgerConstructorElement key={index} {...item} />
+            ))}
         </div>
-        <ConstructorElement
-          type="bottom"
-          isLocked={true}
-          text="Bun"
-          price="1000"
-          // thumbnail={data[0].image}
-        />
+        {ingredients
+          .filter((item) => item.type === "bun")
+          .map((item, index) => (
+            <ConstructorElement
+              thumbnail={item.image}
+              price={item.price}
+              text={item.name}
+              isLocked={true}
+              type="bottom"
+            />
+          ))}
       </div>
-
       <div className="mr-4">
         <span className="text text_type_digits-medium mr-10">
           610 <CurrencyIcon></CurrencyIcon>

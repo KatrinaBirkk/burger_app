@@ -9,9 +9,9 @@ import { useDrag } from "react-dnd";
 import { store } from "../../components/store";
 import { writeInfo } from "../services/actions/ingredientInfo";
 
-const ProdCard = ({ _id, price, name, image, ...items }) => {
+const ProdCard = ({ _id, price, name, image, __v, ...items }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // console.log(items);
+  console.log(items);
 
   function openModal() {
     setIsOpen(true);
@@ -41,7 +41,7 @@ const ProdCard = ({ _id, price, name, image, ...items }) => {
         <div ref={ref} className="prodCard" onClick={openModal}>
           {/* <div className="prodCard" onClick={openModal(image, name, price)}> */}
           <img className="cardPicture" src={image} alt={name}></img>
-          <Counter number="1" />
+          <Counter number={_id === "60d3b41abdacab0026a733c7" ? ++__v : __v} />
           <div style={{ display: "flex" }} className="mt-1 mb-1">
             <p className="text text_type_digits-default mr-2">{price}</p>
             <CurrencyIcon />

@@ -4,6 +4,9 @@ export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
 export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
+export const INCREASE_INGREDIENT = "INCREASE_INGREDIENT";
+export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
+export const REPLACE_INGREDIENT = "REPLACE_INGREDIENT";
 
 const API_URL = "https://norma.nomoreparties.space/api/ingredients";
 
@@ -21,6 +24,7 @@ export function getIngredients() {
             type: GET_INGREDIENTS_SUCCESS,
             items: res.data,
           });
+          // console.log(res.data);
         } else {
           // console.log("ELSE");
           dispatch({
