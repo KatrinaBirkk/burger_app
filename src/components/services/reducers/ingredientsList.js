@@ -12,8 +12,7 @@ const initialState = {
   items: [],
   itemsRequest: false,
   itemsFailed: false,
-  bun: []
-  ingredients: [
+  bun: [
     {
       calories: 643,
       carbohydrates: 85,
@@ -28,6 +27,7 @@ const initialState = {
       _id: "60d3b41abdacab0026a733c7",
     },
   ],
+  ingredients: [],
 };
 
 export const itemsReducer = (state = initialState, action) => {
@@ -52,7 +52,7 @@ export const itemsReducer = (state = initialState, action) => {
     case REPLACE_INGREDIENT: {
       return {
         ...state,
-        ingredients: [...state.items.filter((item) => item._id === action._id)],
+        bun: [...state.items.filter((item) => item._id === action._id)],
       };
     }
     case ADD_INGREDIENT: {

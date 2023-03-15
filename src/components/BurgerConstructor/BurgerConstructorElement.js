@@ -7,7 +7,7 @@ import { useDrag } from "react-dnd";
 import { DELETE_INGREDIENT } from "../services/actions/ingredientsList";
 import { useDispatch } from "react-redux";
 
-const BurgerConstructorElement = ({ _id, price, name, image }) => {
+const BurgerConstructorElement = ({ _id, price, name, image, type }) => {
   // const [isLocked, setIsLocked] = useState("");
 
   // if (record.type === "bun") {
@@ -40,7 +40,6 @@ const BurgerConstructorElement = ({ _id, price, name, image }) => {
         display: "flex",
         gap: "16px",
         alignItems: "center",
-
         width: 568,
       }}
     >

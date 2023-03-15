@@ -20,29 +20,34 @@ import {
 
 const BurgerConstructor = (openModal, isOpen, closeModal) => {
   const { ingredients } = useSelector((state) => state.items);
-  // const { items } = useSelector((state) => state.items);
+  const { bun } = useSelector((state) => state.items);
 
+  console.log("bun");
+  console.log(bun);
   console.log("ingredients");
   console.log(ingredients);
 
   const dispatch = useDispatch();
 
   const moveIngredient = (item) => {
-    // item.type === "bun"
-    dispatch({
-      type: ADD_INGREDIENT,
-      ...item,
-    });
-    // : dispatch({
-    //     type: REPLACE_INGREDIENT,
-    //     ...item,
-    //   });
+    item._id === "60d3b41abdacab0026a733c6" ||
+    item._id === "60d3b41abdacab0026a733c7"
+      ? // item.type === "bun"
+        dispatch({
+          type: REPLACE_INGREDIENT,
+          ...item,
+        })
+      : dispatch({
+          type: ADD_INGREDIENT,
+          ...item,
+        });
     dispatch({
       type: INCREASE_INGREDIENT,
       ...item,
     });
   };
-  // const increaseIngredient = (item) => {
+
+  // const replaceIngredient = (item) => {
   //   dispatch({
   //     type: INCREASE_INGREDIENT,
   //     ...item,
@@ -81,17 +86,16 @@ const BurgerConstructor = (openModal, isOpen, closeModal) => {
           gap: 16,
         }}
       >
-        {ingredients
-          .filter((item) => item.type === "bun")
-          .map((item, index) => (
-            <ConstructorElement
-              thumbnail={item.image}
-              price={item.price}
-              text={item.name}
-              isLocked={true}
-              type="top"
-            />
-          ))}
+        {bun.map((item, index) => (
+          <ConstructorElement
+            key={index}
+            thumbnail={item.image}
+            price={item.price}
+            text={item.name}
+            isLocked={true}
+            type="top"
+          />
+        ))}
         <div
           style={{
             // minHeight: 200,
@@ -104,23 +108,20 @@ const BurgerConstructor = (openModal, isOpen, closeModal) => {
             alignItems: "center",
           }}
         >
-          {ingredients
-            .filter((item) => item.type !== "bun")
-            .map((item, index) => (
-              <BurgerConstructorElement key={index} {...item} />
-            ))}
-        </div>
-        {ingredients
-          .filter((item) => item.type === "bun")
-          .map((item, index) => (
-            <ConstructorElement
-              thumbnail={item.image}
-              price={item.price}
-              text={item.name}
-              isLocked={true}
-              type="bottom"
-            />
+          {ingredients.map((item, index) => (
+            <BurgerConstructorElement key={index} {...item} />
           ))}
+        </div>
+        {bun.map((item, index) => (
+          <ConstructorElement
+            key={index}
+            thumbnail={item.image}
+            price={item.price}
+            text={item.name}
+            isLocked={true}
+            type="bottom"
+          />
+        ))}
       </div>
       <div className="mr-4">
         <span className="text text_type_digits-medium mr-10">

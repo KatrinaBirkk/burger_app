@@ -6,10 +6,8 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDrag } from "react-dnd";
-import { store } from "../../components/store";
-import { writeInfo } from "../services/actions/ingredientInfo";
 
-const ProdCard = ({ _id, price, name, image, __v, ...items }) => {
+const ProdCard = ({ _id, price, name, image, __v, type, ...items }) => {
   const [isOpen, setIsOpen] = useState(false);
   console.log(items);
 
