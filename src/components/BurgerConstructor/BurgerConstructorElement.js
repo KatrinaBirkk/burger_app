@@ -7,16 +7,10 @@ import { useDrag } from "react-dnd";
 import { DELETE_INGREDIENT } from "../services/actions/ingredientsList";
 import { useDispatch } from "react-redux";
 
-const BurgerConstructorElement = ({ _id, price, name, image, type }) => {
-  // const [isLocked, setIsLocked] = useState("");
-
-  // if (record.type === "bun") {
-  //   setIsLocked(!isLocked);
-  // }
-
-  // // const locker = `${isLocked ? "true" : ""} `;
-  // const type = `${isLocked ? "top" : ""} `;
+const BurgerConstructorElement = (item) => {
   const dispatch = useDispatch();
+  const _id = item._id;
+  const id = item.id;
 
   const [{ opacity }, ref] = useDrag({
     type: "pickedIngredients",
@@ -30,13 +24,14 @@ const BurgerConstructorElement = ({ _id, price, name, image, type }) => {
     dispatch({
       type: DELETE_INGREDIENT,
       _id,
+      id,
     });
   };
   return (
-    // <div style={{ opacity }}>
     <div
       ref={ref}
       style={{
+        opacity,
         display: "flex",
         gap: "16px",
         alignItems: "center",
@@ -45,9 +40,9 @@ const BurgerConstructorElement = ({ _id, price, name, image, type }) => {
     >
       <DragIcon type="primary" />
       <ConstructorElement
-        thumbnail={image}
-        price={price}
-        text={name}
+        thumbnail={item.image}
+        price={item.price}
+        text={item.name}
         handleClose={deleteIngredient}
       />
     </div>

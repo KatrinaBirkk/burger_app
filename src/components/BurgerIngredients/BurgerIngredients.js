@@ -1,5 +1,5 @@
 import ProdCard from "./ProdCard";
-import "./prodcards_section.css";
+import "./prodcardsSection.css";
 import SubMenu from "../BurgerConstructor/SubMenu";
 import "./burgerIngredientsContainer.css";
 import PropTypes from "prop-types";

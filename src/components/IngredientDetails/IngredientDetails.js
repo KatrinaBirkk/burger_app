@@ -1,33 +1,25 @@
-import "./ingredientDetails.css";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getInfo } from "../services/actions/ingredientInfo";
-import { store } from "../../components/store";
+import styles from "./ingredientDetails.module.css";
+// import { useEffect } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import { getInfo } from "../services/actions/ingredientInfo";
+// import { store } from "../../components/store";
 
 const IngredientDetails = (data) => {
-  // const { info } = useSelector((state) => state.items);
-  console.log("__________");
-  console.log(data.data);
-  // const dispatch = useDispatch();
+  // console.log("__________");
+  // console.log(data.data);
 
-  // useEffect(() => {
-  //   dispatch(getInfo());
-  // }, [dispatch]);
+  const classNameDetails = styles.ingredientDetails;
+  const classNameTable = styles.ingredientDetailsTable;
 
-  // console.log(info);
-
-  // const currentState = store.getState();
-  // const info_data = currentState.info.info;
-  // console.log(info);
   return (
-    <div className="ingredientDetails">
+    <div className={classNameDetails}>
       <img
         className="cardPicture"
         src={data.data.image_large}
         alt={data.data.name}
       ></img>
       <p className="text text_type_main-medium">{data.data.name}</p>
-      <div className="ingredientDetailsTable">
+      <div className={classNameTable}>
         <p className="text text_type_main-small text_color_inactive">
           Калории, ккал
         </p>

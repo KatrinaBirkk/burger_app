@@ -7,6 +7,7 @@ export const ADD_INGREDIENT = "ADD_INGREDIENT";
 export const INCREASE_INGREDIENT = "INCREASE_INGREDIENT";
 export const DELETE_INGREDIENT = "DELETE_INGREDIENT";
 export const REPLACE_INGREDIENT = "REPLACE_INGREDIENT";
+export const INCREASE_INGREDIENT_BUN = "INCREASE_INGREDIENT_BUN";
 
 const API_URL = "https://norma.nomoreparties.space/api/ingredients";
 

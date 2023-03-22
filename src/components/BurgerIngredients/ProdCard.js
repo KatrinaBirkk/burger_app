@@ -1,15 +1,17 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Counter from "./Counter";
-import "./prodCard.css";
+import "./prodCard.Module.css";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDrag } from "react-dnd";
 
-const ProdCard = ({ _id, price, name, image, __v, type, ...items }) => {
+const ProdCard = ({ ...item }) => {
   const [isOpen, setIsOpen] = useState(false);
-  console.log(items);
+  // console.log(item);
+
+  const _id = item._id;
 
   function openModal() {
     setIsOpen(true);
@@ -32,25 +34,28 @@ const ProdCard = ({ _id, price, name, image, __v, type, ...items }) => {
   return (
     <>
       <Modal open={isOpen} onClose={closeModal} ModalTitle="Детали ингредиента">
-        <IngredientDetails data={{ _id, name, price, ...items }} />
-        {/* <IngredientDetails /> */}
+        <IngredientDetails data={item} />
       </Modal>
       <div style={{ opacity }}>
-        <div ref={ref} className="prodCard" onClick={openModal}>
-          {/* <div className="prodCard" onClick={openModal(image, name, price)}> */}
-          <img className="cardPicture" src={image} alt={name}></img>
-          <Counter number={_id === "60d3b41abdacab0026a733c7" ? ++__v : __v} />
+        <div className="prodCard" onClick={openModal}>
+          <img
+            ref={ref}
+            className="cardPicture"
+            src={item.image}
+            alt={item.name}
+          ></img>
           <div style={{ display: "flex" }} className="mt-1 mb-1">
-            <p className="text text_type_digits-default mr-2">{price}</p>
+            <p className="text text_type_digits-default mr-2">{item.price}</p>
             <CurrencyIcon />
           </div>
+          <Counter number={item.counter} />
           <p
             className="text text_type_main-default"
             style={{
               textAlign: "center",
             }}
           >
-            {name}
+            {item.name}
           </p>
         </div>
       </div>

@@ -6,27 +6,17 @@ import {
   INCREASE_INGREDIENT,
   DELETE_INGREDIENT,
   REPLACE_INGREDIENT,
+  INCREASE_INGREDIENT_BUN,
 } from "../actions/ingredientsList";
+
+import uuid from "react-uuid";
 
 const initialState = {
   items: [],
   itemsRequest: false,
   itemsFailed: false,
-  bun: [
-    {
-      calories: 643,
-      carbohydrates: 85,
-      fat: 26,
-      image: "https://code.s3.yandex.net/react/code/bun-01.png",
-      image_large: "https://code.s3.yandex.net/react/code/bun-01-large.png",
-      image_mobile: "https://code.s3.yandex.net/react/code/bun-01-mobile.png",
-      name: "Флюоресцентная булка R2-D3",
-      price: 988,
-      type: "bun",
-      __v: 1,
-      _id: "60d3b41abdacab0026a733c7",
-    },
-  ],
+  order: [],
+  bun: [],
   ingredients: [],
 };
 
@@ -50,36 +40,77 @@ export const itemsReducer = (state = initialState, action) => {
       return { ...state, itemsFailed: true, itemsRequest: false };
     }
     case REPLACE_INGREDIENT: {
+      const filteredItems = state.items.filter(
+        (item) => item._id === action._id
+      );
       return {
         ...state,
-        bun: [...state.items.filter((item) => item._id === action._id)],
+        items: [
+          ...state.items.map((item) => {
+            if (item._id === action._id) {
+              return {
+                ...item,
+                counter: !item.counter ? action.counter : item.counter,
+              };
+            }
+            return {
+              ...item,
+              counter: 0,
+            };
+          }),
+        ],
+        bun: [...filteredItems],
       };
     }
     case ADD_INGREDIENT: {
+      const filteredItems = state.items.filter(
+        (item) => item._id === action._id
+      );
+      const filteredItemsNew = filteredItems.map((filteredItem) => {
+        return { ...filteredItem, id: uuid() };
+      });
       return {
         ...state,
-        ingredients: [
-          ...state.ingredients,
-          ...state.items.filter((item) => item._id === action._id),
+        items: [
+          ...state.items.map((item) => {
+            if (item._id === action._id) {
+              return {
+                ...item,
+                // counter: action.counter,
+                counter: !item.counter ? action.counter : item.counter,
+              };
+            }
+            return item;
+          }),
         ],
+        ingredients: [...state.ingredients, ...filteredItemsNew],
       };
     }
     case INCREASE_INGREDIENT: {
       return {
         ...state,
         items: [...state.items].map((item) =>
-          item._id === action._id ? { ...item, __v: ++item.__v } : item
+          item._id === action._id ? { ...item, counter: ++item.counter } : item
         ),
       };
     }
+    case INCREASE_INGREDIENT_BUN: {
+      return {
+        ...state,
+        items: [...state.items].map((item) =>
+          item._id === action._id ? { ...item, counter: 2 } : item
+        ),
+      };
+    }
+
     case DELETE_INGREDIENT: {
       return {
         ...state,
         ingredients: [...state.ingredients].filter(
-          (item) => item._id !== action._id
+          (ingredient) => ingredient.id !== action.id
         ),
         items: [...state.items].map((item) =>
-          item._id === action._id ? { ...item, __v: --item.__v } : item
+          item._id === action._id ? { ...item, counter: --item.counter } : item
         ),
       };
     }
