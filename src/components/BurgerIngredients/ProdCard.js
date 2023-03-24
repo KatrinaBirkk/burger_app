@@ -9,7 +9,6 @@ import { useDrag } from "react-dnd";
 
 const ProdCard = ({ ...item }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // console.log(item);
 
   const _id = item._id;
 
@@ -28,8 +27,6 @@ const ProdCard = ({ ...item }) => {
       opacity: monitor.isDragging() ? 0.5 : 1,
     }),
   });
-
-  // const { image, name, price } = props;
 
   return (
     <>

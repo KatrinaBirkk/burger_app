@@ -18,13 +18,11 @@ import {
   REPLACE_INGREDIENT,
   INCREASE_INGREDIENT_BUN,
 } from "../services/actions/ingredientsList";
+import { getOrderNumber } from "../services/actions/ingredientsList";
 
 const BurgerConstructor = () => {
   const { ingredients } = useSelector((state) => state.items);
   const { bun } = useSelector((state) => state.items);
-  const { order } = useSelector((state) => state.items);
-
-  console.log(order);
 
   const totalPrice = useSelector(totalPriceSelector);
 
@@ -37,6 +35,10 @@ const BurgerConstructor = () => {
   function closeModal() {
     setIsOpen(false);
   }
+
+  const arrayId = [...ingredients, ...bun].reduce((arrayId, item) => {
+    return arrayId.push(item._id), arrayId;
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -86,6 +88,14 @@ const BurgerConstructor = () => {
       isHover: monitor.isOver(),
     }),
   });
+
+  const handleClick = () => {
+    const data = [...ingredients, ...bun].reduce((arrayId, item) => {
+      return arrayId.push(item._id), arrayId;
+    }, []);
+    dispatch(getOrderNumber(data));
+    openModal();
+  };
 
   const className = styles.burgerConstructor;
   const classNameBun = styles.constructorBunElement;
@@ -159,12 +169,12 @@ const BurgerConstructor = () => {
           htmlType="button"
           type="primary"
           size="large"
-          onClick={openModal}
+          onClick={handleClick}
         >
           Оформить заказ
         </Button>
         <Modal open={isOpen} onClose={closeModal} ModalTitle="">
-          <OrderDetails />
+          <OrderDetails data={arrayId} />
         </Modal>
       </div>
     </section>

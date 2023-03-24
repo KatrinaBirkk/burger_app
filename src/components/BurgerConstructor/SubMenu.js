@@ -1,10 +1,6 @@
 import React from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
-// function scrollToSection(section) {
-//   document.querySelector({ section }).scrollIntoView();
-// }
-
 const SubMenu = () => {
   const [current, setCurrent] = React.useState("one");
 

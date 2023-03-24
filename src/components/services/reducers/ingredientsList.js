@@ -7,6 +7,8 @@ import {
   DELETE_INGREDIENT,
   REPLACE_INGREDIENT,
   INCREASE_INGREDIENT_BUN,
+  SUBMIT_ORDER_REQUEST,
+  SUBMIT_ORDER_SUCCESS,
 } from "../actions/ingredientsList";
 
 import uuid from "react-uuid";
@@ -15,7 +17,10 @@ const initialState = {
   items: [],
   itemsRequest: false,
   itemsFailed: false,
+  orderNumber: null,
   order: [],
+  sendRequest: false,
+  sendFailed: false,
   bun: [],
   ingredients: [],
 };
@@ -76,7 +81,6 @@ export const itemsReducer = (state = initialState, action) => {
             if (item._id === action._id) {
               return {
                 ...item,
-                // counter: action.counter,
                 counter: !item.counter ? action.counter : item.counter,
               };
             }
@@ -112,6 +116,20 @@ export const itemsReducer = (state = initialState, action) => {
         items: [...state.items].map((item) =>
           item._id === action._id ? { ...item, counter: --item.counter } : item
         ),
+      };
+    }
+    case SUBMIT_ORDER_REQUEST: {
+      return {
+        ...state,
+        sendRequest: true,
+      };
+    }
+    case SUBMIT_ORDER_SUCCESS: {
+      return {
+        ...state,
+        sendFailed: false,
+        order: action.order,
+        sendRequest: false,
       };
     }
     default: {

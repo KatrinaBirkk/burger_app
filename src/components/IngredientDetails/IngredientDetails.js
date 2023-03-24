@@ -1,13 +1,6 @@
 import styles from "./ingredientDetails.module.css";
-// import { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { getInfo } from "../services/actions/ingredientInfo";
-// import { store } from "../../components/store";
 
 const IngredientDetails = (data) => {
-  // console.log("__________");
-  // console.log(data.data);
-
   const classNameDetails = styles.ingredientDetails;
   const classNameTable = styles.ingredientDetailsTable;
 

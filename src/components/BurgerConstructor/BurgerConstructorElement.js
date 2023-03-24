@@ -2,7 +2,6 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-// import { useState } from "react";
 import { useDrag } from "react-dnd";
 import { DELETE_INGREDIENT } from "../services/actions/ingredientsList";
 import { useDispatch } from "react-redux";
@@ -46,7 +45,6 @@ const BurgerConstructorElement = (item) => {
         handleClose={deleteIngredient}
       />
     </div>
-    // </div>
   );
 };
 

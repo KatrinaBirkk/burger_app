@@ -13,10 +13,7 @@ export const ingredientInfoReducer = (state = initialState, action) => {
       };
     }
     case WRITE_INFO: {
-      // return { todos: [...state.todos, action.payload] };
-      // console.log(action);
       return {
-        // ...state,
         info: action.payload,
       };
     }
