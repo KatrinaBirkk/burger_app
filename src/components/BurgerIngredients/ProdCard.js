@@ -22,7 +22,7 @@ const ProdCard = ({ ...item }) => {
 
   const [{ opacity }, ref] = useDrag({
     type: "ingredients",
-    item: { _id },
+    item: { item },
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.5 : 1,
     }),

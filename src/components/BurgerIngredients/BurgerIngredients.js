@@ -3,13 +3,25 @@ import "./prodcardsSection.css";
 import SubMenu from "../BurgerConstructor/SubMenu";
 import "./burgerIngredientsContainer.css";
 import PropTypes from "prop-types";
+import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 
-import { useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getIngredients } from "../services/actions/ingredientsList";
 
 const BurgerIngredients = () => {
   const dispatch = useDispatch();
+
+  const [current, setCurrent] = useState("one");
+
+  const one = useRef(null);
+  const two = useRef(null);
+  const three = useRef(null);
+
+  const handleClick = (myRef, arg) => {
+    myRef.current?.scrollIntoView({ behavior: "smooth" });
+    setCurrent(arg);
+  };
 
   useEffect(() => {
     dispatch(getIngredients());
@@ -30,7 +42,32 @@ const BurgerIngredients = () => {
           <h1 className="text text_type_main-large mb-5 mt-10">
             Соберите бургер
           </h1>
-          <SubMenu />
+          {
+            <>
+              <div style={{ display: "flex" }}>
+                <Tab
+                  // value="one"
+                  active={current === "one"}
+                  onClick={() => handleClick(one, "one")}
+                >
+                  Булки
+                </Tab>
+                <Tab
+                  // value="two"
+                  active={current === "two"}
+                  onClick={() => handleClick(two, "two")}
+                >
+                  Соусы
+                </Tab>
+                <Tab
+                  active={current === "three"}
+                  onClick={() => handleClick(three, "three")}
+                >
+                  Начинки
+                </Tab>
+              </div>
+            </>
+          }
           <section
             style={{
               width: 600,
@@ -38,7 +75,7 @@ const BurgerIngredients = () => {
               overflowY: "scroll",
             }}
           >
-            <section id="section_1">
+            <section ref={one} id="section_bun">
               <h2 className="text text_type_main-medium mt-10">Булки</h2>
               <div className="prodcards_section">
                 {items
@@ -48,7 +85,7 @@ const BurgerIngredients = () => {
                   ))}
               </div>
             </section>
-            <section id="section_2">
+            <section ref={two} id="section_sauce">
               <h2 className="text text_type_main-medium mt-10">Соусы</h2>
               <div className="prodcards_section">
                 {items
@@ -58,7 +95,7 @@ const BurgerIngredients = () => {
                   ))}
               </div>
             </section>
-            <section id="section_3">
+            <section ref={three} id="section_main">
               <h2 className="text text_type_main-medium mt-10">Начинки</h2>
               <div className="prodcards_section">
                 {items

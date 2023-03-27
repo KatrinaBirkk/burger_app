@@ -24,6 +24,8 @@ const BurgerConstructor = () => {
   const { ingredients } = useSelector((state) => state.items);
   const { bun } = useSelector((state) => state.items);
 
+  // const [pets, setPets] = useState(PETS);
+
   const totalPrice = useSelector(totalPriceSelector);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -36,9 +38,9 @@ const BurgerConstructor = () => {
     setIsOpen(false);
   }
 
-  const arrayId = [...ingredients, ...bun].reduce((arrayId, item) => {
-    return arrayId.push(item._id), arrayId;
-  }, []);
+  // const arrayId = [...ingredients, ...bun].reduce((arrayId, item) => {
+  //   return arrayId.push(item._id), arrayId;
+  // }, []);
 
   const dispatch = useDispatch();
 
@@ -69,11 +71,9 @@ const BurgerConstructor = () => {
   };
 
   const move = (item) => {
-    if (
-      item._id === "60d3b41abdacab0026a733c6" ||
-      item._id === "60d3b41abdacab0026a733c7"
-    ) {
+    if (item.item.type === "bun") {
       moveIngredientBun(item);
+      // console.log(item.type);
     } else {
       moveIngredientMain(item);
     }
@@ -91,7 +91,7 @@ const BurgerConstructor = () => {
 
   const handleClick = () => {
     const data = [...ingredients, ...bun].reduce((arrayId, item) => {
-      return arrayId.push(item._id), arrayId;
+      return arrayId.push(item), arrayId;
     }, []);
     dispatch(getOrderNumber(data));
     openModal();
@@ -104,8 +104,6 @@ const BurgerConstructor = () => {
   const classNameTopIngredient = styles.constructorTopIngredient;
   const classNameBottomIngredient = styles.constructorBottomIngredient;
   const classNameIngredientText = styles.ingredientText;
-
-  //расчет суммы заказа
 
   return (
     <section className={className} ref={dropTarget}>
@@ -120,7 +118,8 @@ const BurgerConstructor = () => {
           ) : (
             bun.map((item, index) => (
               <ConstructorElement
-                key={index}
+                key={item._id}
+                index={index}
                 thumbnail={item.image}
                 price={item.price}
                 text={item.name}
@@ -134,7 +133,18 @@ const BurgerConstructor = () => {
           className={`${classNameMain} ${isHover ? styles.onHoverMiddle : ""}`}
         >
           {ingredients.map((item, index) => (
-            <BurgerConstructorElement key={index} {...item} />
+            <BurgerConstructorElement
+              // onDragStart={(e) => dragStartHandler(e, item)}
+              // onDragEnd={(e) => dragEndHandler(e)}
+              // onDragLeave={(e) => dragLeaveHandler(e)}
+              // onDragOver={(e) => dragOverHandler(e)}
+              // onDrop={(e) => dropHandler(e, item)}
+              // draggable={true}
+              key={item._id}
+              // moveIngredientsList={moveIngredientsList}
+              index={index}
+              {...item}
+            />
           ))}
         </div>
         <div
@@ -149,7 +159,8 @@ const BurgerConstructor = () => {
           ) : (
             bun.map((item, index) => (
               <ConstructorElement
-                key={index}
+                key={item._id}
+                index={index}
                 thumbnail={item.image}
                 price={item.price}
                 text={item.name}
@@ -174,7 +185,7 @@ const BurgerConstructor = () => {
           Оформить заказ
         </Button>
         <Modal open={isOpen} onClose={closeModal} ModalTitle="">
-          <OrderDetails data={arrayId} />
+          <OrderDetails />
         </Modal>
       </div>
     </section>

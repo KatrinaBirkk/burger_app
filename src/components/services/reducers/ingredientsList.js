@@ -9,6 +9,7 @@ import {
   INCREASE_INGREDIENT_BUN,
   SUBMIT_ORDER_REQUEST,
   SUBMIT_ORDER_SUCCESS,
+  UPDATE_LIST,
 } from "../actions/ingredientsList";
 
 import uuid from "react-uuid";
@@ -46,13 +47,13 @@ export const itemsReducer = (state = initialState, action) => {
     }
     case REPLACE_INGREDIENT: {
       const filteredItems = state.items.filter(
-        (item) => item._id === action._id
+        (item) => item._id === action.item._id
       );
       return {
         ...state,
         items: [
           ...state.items.map((item) => {
-            if (item._id === action._id) {
+            if (item._id === action.item._id) {
               return {
                 ...item,
                 counter: !item.counter ? action.counter : item.counter,
@@ -69,7 +70,7 @@ export const itemsReducer = (state = initialState, action) => {
     }
     case ADD_INGREDIENT: {
       const filteredItems = state.items.filter(
-        (item) => item._id === action._id
+        (item) => item._id === action.item._id
       );
       const filteredItemsNew = filteredItems.map((filteredItem) => {
         return { ...filteredItem, id: uuid() };
@@ -78,7 +79,7 @@ export const itemsReducer = (state = initialState, action) => {
         ...state,
         items: [
           ...state.items.map((item) => {
-            if (item._id === action._id) {
+            if (item._id === action.item._id) {
               return {
                 ...item,
                 counter: !item.counter ? action.counter : item.counter,
@@ -94,7 +95,9 @@ export const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [...state.items].map((item) =>
-          item._id === action._id ? { ...item, counter: ++item.counter } : item
+          item._id === action.item._id
+            ? { ...item, counter: ++item.counter }
+            : item
         ),
       };
     }
@@ -102,7 +105,7 @@ export const itemsReducer = (state = initialState, action) => {
       return {
         ...state,
         items: [...state.items].map((item) =>
-          item._id === action._id ? { ...item, counter: 2 } : item
+          item._id === action.item._id ? { ...item, counter: 2 } : item
         ),
       };
     }
@@ -130,6 +133,12 @@ export const itemsReducer = (state = initialState, action) => {
         sendFailed: false,
         order: action.order,
         sendRequest: false,
+      };
+    }
+    case UPDATE_LIST: {
+      return {
+        ...state,
+        ingredients: action.ingredients,
       };
     }
     default: {

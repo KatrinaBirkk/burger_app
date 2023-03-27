@@ -2,22 +2,67 @@ import {
   ConstructorElement,
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDrag } from "react-dnd";
+import { useDrag, useDrop } from "react-dnd";
 import { DELETE_INGREDIENT } from "../services/actions/ingredientsList";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useRef } from "react";
+import { sortListItems } from "../services/actions/ingredientsList";
 
-const BurgerConstructorElement = (item) => {
+const BurgerConstructorElement = (item, index) => {
+  const { ingredients } = useSelector((state) => state.items);
   const dispatch = useDispatch();
   const _id = item._id;
   const id = item.id;
 
-  const [{ opacity }, ref] = useDrag({
-    type: "pickedIngredients",
-    item: { _id },
+  index = item.index;
+  // console.log(item.index);
+
+  const [{ opacity }, dragRef] = useDrag({
+    type: "ingredients",
+    item: { index },
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.5 : 1,
     }),
   });
+
+  function moveIngredientsList(dragIndex, hoverIndex) {
+    const dragItem = ingredients[dragIndex];
+    const hoverItem = ingredients[hoverIndex];
+    // Swap places of dragItem and hoverItem in the pets array
+    // setPets((pets) => {
+    const updatedList = [...ingredients];
+
+    updatedList[dragIndex] = hoverItem;
+    updatedList[hoverIndex] = dragItem;
+    console.log("updatedList", updatedList);
+    dispatch(sortListItems(updatedList));
+  }
+
+  const [, dropRef] = useDrop({
+    accept: "ingredients",
+    hover: (item, monitor) => {
+      const dragIndex = item.index;
+      console.log("dragIndex", dragIndex);
+      const hoverIndex = index;
+      console.log("hoverIndex", hoverIndex);
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      const hoverActualY = monitor.getClientOffset().y - hoverBoundingRect.top;
+
+      // if dragging down, continue only when hover is smaller than middle Y
+      if (dragIndex < hoverIndex && hoverActualY < hoverMiddleY) return;
+      // if dragging up, continue only when hover is bigger than middle Y
+      if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return;
+
+      moveIngredientsList(dragIndex, hoverIndex);
+      item.index = hoverIndex;
+    },
+  });
+
+  // Join the 2 refs together into one (both draggable and can be dropped on)
+  const ref = useRef(null);
+  const dragDropRef = dragRef(dropRef(ref));
 
   const deleteIngredient = () => {
     dispatch({
@@ -28,7 +73,7 @@ const BurgerConstructorElement = (item) => {
   };
   return (
     <div
-      ref={ref}
+      ref={dragDropRef}
       style={{
         opacity,
         display: "flex",

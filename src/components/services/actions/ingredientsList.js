@@ -10,6 +10,7 @@ export const SUBMIT_ORDER_SUCCESS = "SUBMIT_ORDER_SUCCESS";
 export const SUBMIT_ORDER_REQUEST = "SUBMIT_ORDER_REQUEST";
 export const COMBINE_INGREDIENTS = "COMBINE_INGREDIENTS";
 export const SUBMIT_ORDER_FAILED = "SUBMIT_ORDER_FAILED";
+export const UPDATE_LIST = "UPDATE_LIST";
 
 const API_URL = "https://norma.nomoreparties.space/api/ingredients";
 
@@ -40,6 +41,15 @@ export function getOrderNumber(info) {
       .catch((error) => {
         console.error(error);
       });
+  };
+}
+
+export function sortListItems(list) {
+  return function (dispatch) {
+    dispatch({
+      type: UPDATE_LIST,
+      ingredients: [...list],
+    });
   };
 }
 
