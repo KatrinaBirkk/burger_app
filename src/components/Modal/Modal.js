@@ -2,7 +2,7 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import ReactDom from "react-dom";
 import { useRef, useEffect } from "react";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import "./modal.css";
+import styles from "./modal.module.css";
 
 const Modal = ({ open, children, onClose, ModalTitle }) => {
   const modalRef = useRef(null);
@@ -33,21 +33,14 @@ const Modal = ({ open, children, onClose, ModalTitle }) => {
   }, [open, onClose]);
 
   if (!open) return null;
-
+  const classNameModalHeader = styles.modalHeader;
   return ReactDom.createPortal(
     <>
       <ModalOverlay ref={modalRef} />
-      <div className="modalContainer">
-        <div className="modalHeader mt-10 ml-10 mr-10">
+      <div className={styles.modalContainer}>
+        <div className={classNameModalHeader}>
           <p className="text text_type_main-large">{ModalTitle}</p>
-          <button
-            style={{
-              backgroundColor: "transparent",
-              borderStyle: "none",
-              cursor: "pointer",
-            }}
-            onClick={onClose}
-          >
+          <button className={styles.button} onClick={onClose}>
             <CloseIcon type="primary" />
           </button>
         </div>

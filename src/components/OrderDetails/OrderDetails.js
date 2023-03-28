@@ -1,4 +1,4 @@
-import "./orderDetails.css";
+import styles from "./orderDetails.module.css";
 import { useSelector } from "react-redux";
 
 const OrderDetails = () => {
@@ -13,7 +13,7 @@ const OrderDetails = () => {
   } else {
     return (
       <>
-        <div className="orderDetailsContainer">
+        <div className={styles.orderDetailsContainer}>
           <p className="text text_type_digits-large mt-4 mb-8">
             {order.order.number}
           </p>

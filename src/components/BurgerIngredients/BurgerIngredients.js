@@ -1,11 +1,8 @@
 import ProdCard from "./ProdCard";
 import { useInView } from "react-intersection-observer";
-import "./prodcardsSection.css";
-// import SubMenu from "../BurgerConstructor/SubMenu";
-import "./burgerIngredientsContainer.css";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-
+import styles from "./burgerIngredients.module.css";
 import { useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getIngredients } from "../services/actions/ingredientsList";
@@ -53,13 +50,13 @@ const BurgerIngredients = () => {
     // console.log(current);
     return (
       <>
-        <div className="burgerIngredientsContainer">
+        <div className={styles.burgerIngredientsContainer}>
           <h1 className="text text_type_main-large mb-5 mt-10">
             Соберите бургер
           </h1>
           {
             <>
-              <div style={{ display: "flex" }}>
+              <div className={styles.submenu}>
                 <Tab
                   // value="one"
                   active={current === "one"}
@@ -83,21 +80,13 @@ const BurgerIngredients = () => {
               </div>
             </>
           }
-          {/* <p>scrollPosition {scrollPosition}</p> */}
-          <section
-            // ref={divRef}
-            style={{
-              width: 600,
-              height: 756,
-              overflowY: "scroll",
-            }}
-          >
+          <section className={styles.scrollSection}>
             <section id="section_bun">
               <section ref={one} id="section_bun">
                 <h2 ref={bun} className="text text_type_main-medium mt-10">
                   Булки
                 </h2>
-                <div className="prodcards_section">
+                <div className={styles.prodcardsSection}>
                   {items
                     .filter((item) => item.type === "bun")
                     .map((item) => (
@@ -111,7 +100,7 @@ const BurgerIngredients = () => {
                 <h2 ref={sauce} className="text text_type_main-medium mt-10">
                   Соусы
                 </h2>
-                <div className="prodcards_section">
+                <div className={styles.prodcardsSection}>
                   {items
                     .filter((item) => item.type === "sauce")
                     .map((item) => (
@@ -125,7 +114,7 @@ const BurgerIngredients = () => {
                 <h2 ref={main} className="text text_type_main-medium mt-10">
                   Начинки
                 </h2>
-                <div className="prodcards_section">
+                <div className={styles.prodcardsSection}>
                   {items
                     .filter((item) => item.type === "main")
                     .map((item) => (
@@ -146,5 +135,4 @@ BurgerIngredients.propTypes = {
   _id: PropTypes.number,
 };
 
-// export default BurgerIngredients;
 export default BurgerIngredients;

@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
-import "./modalOverlay.css";
+import styles from "./modalOverlay.module.css";
 
 const ModalOverlay = forwardRef((props, ref) => (
-  <div ref={ref} className="modalOverlay"></div>
+  <div ref={ref} className={styles.modalOverlay}></div>
 ));
 
 export default ModalOverlay;

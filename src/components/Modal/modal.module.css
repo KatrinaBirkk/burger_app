@@ -16,4 +16,13 @@
   height: 64px;
   gap: 36px;
   grid-template-columns: 580px 1fr;
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.button {
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
 }

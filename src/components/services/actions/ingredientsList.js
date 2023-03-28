@@ -79,11 +79,3 @@ export function getIngredients() {
       });
   };
 }
-
-// export function listenScroll() {
-//   return function(dispatch) {
-//     dispatch({
-//     type: MEASURE_SCROLL
-
-//   }
-// }
