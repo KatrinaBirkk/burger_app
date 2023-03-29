@@ -47,7 +47,6 @@ const BurgerIngredients = () => {
   } else if (itemsRequest) {
     return <p>Загрузка...</p>;
   } else {
-    // console.log(current);
     return (
       <>
         <div className={styles.burgerIngredientsContainer}>

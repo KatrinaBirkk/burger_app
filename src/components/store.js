@@ -12,8 +12,6 @@ const enhancer = composeEnhancers(applyMiddleware(thunk));
 
 const rootReducer = combineReducers({
   items: itemsReducer,
-  BurgerIngredients: BurgerIngredientsReducer,
-  ingredients: ingredientsReducer,
   info: ingredientInfoReducer,
 });
 export const store = createStore(rootReducer, enhancer);

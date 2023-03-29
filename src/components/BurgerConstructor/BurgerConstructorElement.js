@@ -15,10 +15,9 @@ const BurgerConstructorElement = (item, index) => {
   const id = item.id;
 
   index = item.index;
-  // console.log(item.index);
 
   const [{ opacity }, dragRef] = useDrag({
-    type: "ingredients",
+    type: "items",
     item: { index },
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0.5 : 1,
@@ -34,17 +33,14 @@ const BurgerConstructorElement = (item, index) => {
 
     updatedList[dragIndex] = hoverItem;
     updatedList[hoverIndex] = dragItem;
-    console.log("updatedList", updatedList);
     dispatch(sortListItems(updatedList));
   }
 
   const [, dropRef] = useDrop({
-    accept: "ingredients",
+    accept: "items",
     hover: (item, monitor) => {
       const dragIndex = item.index;
-      console.log("dragIndex", dragIndex);
       const hoverIndex = index;
-      console.log("hoverIndex", hoverIndex);
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;

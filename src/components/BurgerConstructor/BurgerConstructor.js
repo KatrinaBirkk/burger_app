@@ -73,7 +73,6 @@ const BurgerConstructor = () => {
   const move = (item) => {
     if (item.item.type === "bun") {
       moveIngredientBun(item);
-      // console.log(item.type);
     } else {
       moveIngredientMain(item);
     }
