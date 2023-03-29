@@ -1,0 +1,28 @@
+.modalContainer {
+  position: fixed;
+  width: 720;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* border: 2px solid #4c4cff; */
+  border-radius: 40px;
+  background-color: #1c1c21;
+  z-index: 10;
+}
+
+.modalHeader {
+  display: grid;
+  align-items: center;
+  height: 64px;
+  gap: 36px;
+  grid-template-columns: 580px 1fr;
+  margin-top: 40px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.button {
+  background-color: transparent;
+  border-style: none;
+  cursor: pointer;
+}
