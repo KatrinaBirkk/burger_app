@@ -1,4 +1,4 @@
-import styles from "./orderDetails.module.css";
+import styles from "./order-details.module.css";
 import { useSelector } from "react-redux";
 
 const OrderDetails = () => {

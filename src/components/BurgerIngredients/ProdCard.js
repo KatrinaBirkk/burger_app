@@ -1,6 +1,6 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Counter from "./Counter";
-import "./prodCard.Module.css";
+import styles from "./prod-card.module.css";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useState } from "react";
@@ -10,7 +10,7 @@ import { useDrag } from "react-dnd";
 const ProdCard = ({ ...item }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const _id = item._id;
+  // const _id = item._id;
 
   function openModal() {
     setIsOpen(true);
@@ -34,26 +34,19 @@ const ProdCard = ({ ...item }) => {
         <IngredientDetails data={item} />
       </Modal>
       <div style={{ opacity }}>
-        <div className="prodCard" onClick={openModal}>
+        <div className={styles.prodCard} onClick={openModal}>
           <img
             ref={ref}
-            className="cardPicture"
+            className={styles.cardPicture}
             src={item.image}
             alt={item.name}
           ></img>
-          <div style={{ display: "flex" }} className="mt-1 mb-1">
+          <div className={styles.displayCard}>
             <p className="text text_type_digits-default mr-2">{item.price}</p>
             <CurrencyIcon />
           </div>
           <Counter number={item.counter} />
-          <p
-            className="text text_type_main-default"
-            style={{
-              textAlign: "center",
-            }}
-          >
-            {item.name}
-          </p>
+          <p className="text text_type_main-default">{item.name}</p>
         </div>
       </div>
     </>

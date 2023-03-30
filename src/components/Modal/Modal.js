@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import { useRef, useEffect } from "react";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./modal.module.css";
+import PropTypes from "prop-types";
 
 const Modal = ({ open, children, onClose, ModalTitle }) => {
   const modalRef = useRef(null);
@@ -49,6 +50,12 @@ const Modal = ({ open, children, onClose, ModalTitle }) => {
     </>,
     document.getElementById("portal")
   );
+};
+
+Modal.propTypes = {
+  open: PropTypes.bool,
+  onClose: PropTypes.func,
+  ModalTitle: PropTypes.string,
 };
 
 export default Modal;

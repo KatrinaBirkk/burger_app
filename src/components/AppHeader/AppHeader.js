@@ -1,6 +1,6 @@
 import NavButton from "./NavButton";
 import LogoPicture from "./LogoPicture";
-import "../AppHeader/appHeader.css";
+import styles from "./app-header.module.css";
 
 import {
   BurgerIcon,
@@ -10,13 +10,13 @@ import {
 
 const AppHeader = () => {
   return (
-    <div className="container">
-      <div className="navMenu">
+    <div className={styles.container}>
+      <nav className={styles.navMenu}>
         <NavButton text="Конструктор" iconName={BurgerIcon} />
         <NavButton text="Лента заказов" iconName={ListIcon} />
         <LogoPicture />
         <NavButton text="Личный кабинет" iconName={ProfileIcon} />
-      </div>
+      </nav>
     </div>
   );
 };

@@ -4,8 +4,8 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorElement from "./BurgerConstructorElement";
-import styles from "./burgerConstructor.module.css";
-import { totalPriceSelector } from "./utils";
+import styles from "./burger-constructor.module.css";
+import { totalPriceSelector } from "../utils";
 import Modal from "../Modal/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
@@ -17,14 +17,12 @@ import {
   INCREASE_INGREDIENT,
   REPLACE_INGREDIENT,
   INCREASE_INGREDIENT_BUN,
-} from "../services/actions/ingredientsList";
-import { getOrderNumber } from "../services/actions/ingredientsList";
+} from "../../services/actions/ingredientsList";
+import { getOrderNumber } from "../../services/actions/ingredientsList";
 
 const BurgerConstructor = () => {
   const { ingredients } = useSelector((state) => state.items);
   const { bun } = useSelector((state) => state.items);
-
-  // const [pets, setPets] = useState(PETS);
 
   const totalPrice = useSelector(totalPriceSelector);
 
@@ -37,10 +35,6 @@ const BurgerConstructor = () => {
   function closeModal() {
     setIsOpen(false);
   }
-
-  // const arrayId = [...ingredients, ...bun].reduce((arrayId, item) => {
-  //   return arrayId.push(item._id), arrayId;
-  // }, []);
 
   const dispatch = useDispatch();
 
@@ -117,11 +111,11 @@ const BurgerConstructor = () => {
           ) : (
             bun.map((item, index) => (
               <ConstructorElement
-                key={item._id}
+                key={item.id}
                 index={index}
                 thumbnail={item.image}
                 price={item.price}
-                text={item.name}
+                text={`${item.name} (верх)`}
                 isLocked={true}
                 type="top"
               />
@@ -132,18 +126,7 @@ const BurgerConstructor = () => {
           className={`${classNameMain} ${isHover ? styles.onHoverMiddle : ""}`}
         >
           {ingredients.map((item, index) => (
-            <BurgerConstructorElement
-              // onDragStart={(e) => dragStartHandler(e, item)}
-              // onDragEnd={(e) => dragEndHandler(e)}
-              // onDragLeave={(e) => dragLeaveHandler(e)}
-              // onDragOver={(e) => dragOverHandler(e)}
-              // onDrop={(e) => dropHandler(e, item)}
-              // draggable={true}
-              key={item._id}
-              // moveIngredientsList={moveIngredientsList}
-              index={index}
-              {...item}
-            />
+            <BurgerConstructorElement key={item.id} index={index} {...item} />
           ))}
         </div>
         <div
@@ -158,11 +141,11 @@ const BurgerConstructor = () => {
           ) : (
             bun.map((item, index) => (
               <ConstructorElement
-                key={item._id}
+                key={item.id}
                 index={index}
                 thumbnail={item.image}
                 price={item.price}
-                text={item.name}
+                text={`${item.name} (низ)`}
                 isLocked={true}
                 type="bottom"
               />

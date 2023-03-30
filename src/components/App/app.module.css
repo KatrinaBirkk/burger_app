@@ -1,0 +1,10 @@
+.app {
+  color: #f2f2f3;
+}
+
+.menuScreen {
+  display: flex;
+  gap: 40px;
+  width: 1240px;
+  margin: auto;
+}

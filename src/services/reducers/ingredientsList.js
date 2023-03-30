@@ -49,6 +49,9 @@ export const itemsReducer = (state = initialState, action) => {
       const filteredItems = state.items.filter(
         (item) => item._id === action.item._id
       );
+      const filteredItemsNew = filteredItems.map((filteredItem) => {
+        return { ...filteredItem, id: uuid() };
+      });
       return {
         ...state,
         items: [
@@ -65,7 +68,7 @@ export const itemsReducer = (state = initialState, action) => {
             };
           }),
         ],
-        bun: [...filteredItems],
+        bun: [...filteredItemsNew],
       };
     }
     case ADD_INGREDIENT: {

@@ -1,3 +1,5 @@
+import { _checkResponse } from "../../components/utils";
+
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
 export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
@@ -12,14 +14,14 @@ export const COMBINE_INGREDIENTS = "COMBINE_INGREDIENTS";
 export const SUBMIT_ORDER_FAILED = "SUBMIT_ORDER_FAILED";
 export const UPDATE_LIST = "UPDATE_LIST";
 
-const API_URL = "https://norma.nomoreparties.space/api/ingredients";
+const API_URL = "https://norma.nomoreparties.space/api/";
 
 export function getOrderNumber(info) {
   return function (dispatch) {
     dispatch({
       type: SUBMIT_ORDER_REQUEST,
     });
-    fetch(`https://norma.nomoreparties.space/api/orders`, {
+    fetch(`${API_URL}orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +30,8 @@ export function getOrderNumber(info) {
         ingredients: info,
       }),
     })
-      .then((response) => response.json())
+      .then(_checkResponse)
+
       .then((res) => {
         if (res && res.success) {
           dispatch({
@@ -36,10 +39,6 @@ export function getOrderNumber(info) {
             order: res,
           });
         }
-      })
-
-      .catch((error) => {
-        console.error(error);
       });
   };
 }
@@ -58,8 +57,8 @@ export function getIngredients() {
     dispatch({
       type: GET_INGREDIENTS_REQUEST,
     });
-    fetch(API_URL)
-      .then((res) => res.json())
+    fetch(`${API_URL}ingredients`)
+      .then(_checkResponse)
       .then((res) => {
         if (res && res.success) {
           dispatch({
@@ -71,11 +70,6 @@ export function getIngredients() {
             type: GET_INGREDIENTS_FAILED,
           });
         }
-      })
-      .catch((err) => {
-        dispatch({
-          type: GET_INGREDIENTS_FAILED,
-        });
       });
   };
 }

@@ -9,7 +9,7 @@
 }
 
 .burgerIngredientsContainer {
-  width: 600px;
+  min-width: 610px;
   height: 912px;
   margin-top: -2px;
   background: #131316;

@@ -1,4 +1,4 @@
-import styles from "./ingredientDetails.module.css";
+import styles from "./ingredient-details.module.css";
 
 const IngredientDetails = (data) => {
   const classNameDetails = styles.ingredientDetails;
