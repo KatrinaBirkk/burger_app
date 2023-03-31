@@ -187,10 +187,4 @@ const BurgerConstructor = () => {
   );
 };
 
-BurgerConstructor.propTypes = {
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
-};
-
 export default BurgerConstructor;

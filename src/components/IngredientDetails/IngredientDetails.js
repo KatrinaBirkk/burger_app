@@ -41,14 +41,8 @@ const IngredientDetails = (props) => {
   );
 };
 
-export const data = PropTypes.shape({
-  calories: PropTypes.number,
-  carbohydrates: PropTypes.number,
-  fat: PropTypes.number,
-  image_large: PropTypes.string,
-  name: PropTypes.string,
-  price: PropTypes.number,
-  proteins: PropTypes.number,
-});
+IngredientDetails.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default IngredientDetails;
