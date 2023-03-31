@@ -1,11 +1,12 @@
 import ProdCard from "./ProdCard";
 import { useInView } from "react-intersection-observer";
 import PropTypes from "prop-types";
+import { item } from "../BurgerConstructor/BurgerConstructorElement";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./burgerIngredients.module.css";
+import styles from "./burger-ingredients.module.css";
 import { useRef, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getIngredients } from "../services/actions/ingredientsList";
+import { getIngredients } from "../../services/actions/ingredientsList";
 
 const BurgerIngredients = () => {
   const dispatch = useDispatch();
@@ -127,11 +128,6 @@ const BurgerIngredients = () => {
       </>
     );
   }
-};
-
-BurgerIngredients.propTypes = {
-  type: PropTypes.string,
-  _id: PropTypes.number,
 };
 
 export default BurgerIngredients;

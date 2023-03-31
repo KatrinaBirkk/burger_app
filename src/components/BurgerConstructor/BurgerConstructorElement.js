@@ -3,10 +3,12 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag, useDrop } from "react-dnd";
-import { DELETE_INGREDIENT } from "../services/actions/ingredientsList";
+import { DELETE_INGREDIENT } from "../../services/actions/ingredientsList";
 import { useSelector, useDispatch } from "react-redux";
 import { useRef } from "react";
-import { sortListItems } from "../services/actions/ingredientsList";
+import { sortListItems } from "../../services/actions/ingredientsList";
+import PropTypes from "prop-types";
+import styles from "./burger-constructor.module.css";
 
 const BurgerConstructorElement = (item, index) => {
   const { ingredients } = useSelector((state) => state.items);
@@ -68,16 +70,7 @@ const BurgerConstructorElement = (item, index) => {
     });
   };
   return (
-    <div
-      ref={dragDropRef}
-      style={{
-        opacity,
-        display: "flex",
-        gap: "16px",
-        alignItems: "center",
-        width: 568,
-      }}
-    >
+    <div ref={dragDropRef} className={styles.container} style={{ opacity }}>
       <DragIcon type="primary" />
       <ConstructorElement
         thumbnail={item.image}
@@ -88,5 +81,20 @@ const BurgerConstructorElement = (item, index) => {
     </div>
   );
 };
+
+export const item = PropTypes.shape({
+  calories: PropTypes.number,
+  carbohydrates: PropTypes.number,
+  fat: PropTypes.number,
+  image: PropTypes.string,
+  image_large: PropTypes.string,
+  image_mobile: PropTypes.string,
+  name: PropTypes.string,
+  price: PropTypes.number,
+  proteins: PropTypes.number,
+  type: PropTypes.string,
+  __v: PropTypes.number,
+  _id: PropTypes.string,
+});
 
 export default BurgerConstructorElement;

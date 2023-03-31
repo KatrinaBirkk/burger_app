@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: space-between;
 }
-.button-inactive {
+.button_inactive {
   display: flex;
   background-color: transparent;
   border: none;
@@ -32,8 +32,8 @@
   gap: 8px;
 }
 
-.button-active {
-  color: white;
+.button_active {
+  color: f2f2f3;
   display: flex;
   background-color: transparent;
   border: none;
@@ -45,13 +45,7 @@
   padding: 16px 10px;
   gap: 8px;
 }
-/* 
-.navButton {
-  display: flex;
-  background-color: transparent;
-  width: fit-content;
-  height: 56px;
-  align-items: center;
-  padding: 16px 20px;
-  gap: 8px;
-} */
+
+.logoPicture {
+  margin-left: 112px;
+}

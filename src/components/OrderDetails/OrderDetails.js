@@ -1,11 +1,13 @@
-import styles from "./orderDetails.module.css";
+import styles from "./order-details.module.css";
 import { useSelector } from "react-redux";
 
 const OrderDetails = () => {
   const { order, sendRequest, sendFailed } = useSelector(
     (state) => state.items
   );
-
+  console.log(order);
+  // console.log(sendRequest);
+  // console.log(sendFailed);
   if (sendFailed) {
     return <p>Произошла ошибка при получении данных</p>;
   } else if (sendRequest) {

@@ -4,8 +4,8 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorElement from "./BurgerConstructorElement";
-import styles from "./burgerConstructor.module.css";
-import { totalPriceSelector } from "./utils";
+import styles from "./burger-constructor.module.css";
+import { totalPriceSelector } from "../utils";
 import Modal from "../Modal/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
@@ -17,14 +17,12 @@ import {
   INCREASE_INGREDIENT,
   REPLACE_INGREDIENT,
   INCREASE_INGREDIENT_BUN,
-} from "../services/actions/ingredientsList";
-import { getOrderNumber } from "../services/actions/ingredientsList";
+} from "../../services/actions/ingredientsList";
+import { getOrderNumber } from "../../services/actions/ingredientsList";
 
 const BurgerConstructor = () => {
   const { ingredients } = useSelector((state) => state.items);
   const { bun } = useSelector((state) => state.items);
-
-  // const [pets, setPets] = useState(PETS);
 
   const totalPrice = useSelector(totalPriceSelector);
 
@@ -37,10 +35,6 @@ const BurgerConstructor = () => {
   function closeModal() {
     setIsOpen(false);
   }
-
-  // const arrayId = [...ingredients, ...bun].reduce((arrayId, item) => {
-  //   return arrayId.push(item._id), arrayId;
-  // }, []);
 
   const dispatch = useDispatch();
 
@@ -104,97 +98,93 @@ const BurgerConstructor = () => {
   const classNameBottomIngredient = styles.constructorBottomIngredient;
   const classNameIngredientText = styles.ingredientText;
 
+  // if (isOpen) {
+
   return (
-    <section className={className} ref={dropTarget}>
-      <div className={classNameMainField}>
-        <div className={`${classNameBun} ${isHover ? styles.onHoverTop : ""}`}>
-          {bun.length === 0 ? (
-            <div className={classNameTopIngredient}>
-              <p className={classNameIngredientText}>
-                Добавьте булку из ингредиентов слева
-              </p>
-            </div>
-          ) : (
-            bun.map((item, index) => (
-              <ConstructorElement
-                key={item._id}
-                index={index}
-                thumbnail={item.image}
-                price={item.price}
-                text={item.name}
-                isLocked={true}
-                type="top"
-              />
-            ))
-          )}
-        </div>
-        <div
-          className={`${classNameMain} ${isHover ? styles.onHoverMiddle : ""}`}
-        >
-          {ingredients.map((item, index) => (
-            <BurgerConstructorElement
-              // onDragStart={(e) => dragStartHandler(e, item)}
-              // onDragEnd={(e) => dragEndHandler(e)}
-              // onDragLeave={(e) => dragLeaveHandler(e)}
-              // onDragOver={(e) => dragOverHandler(e)}
-              // onDrop={(e) => dropHandler(e, item)}
-              // draggable={true}
-              key={item._id}
-              // moveIngredientsList={moveIngredientsList}
-              index={index}
-              {...item}
-            />
-          ))}
-        </div>
-        <div
-          className={`${classNameBun} ${isHover ? styles.onHoverBottom : ""}`}
-        >
-          {bun.length === 0 ? (
-            <div className={classNameBottomIngredient}>
-              <p className={classNameIngredientText}>
-                Добавьте булку из ингредиентов слева
-              </p>
-            </div>
-          ) : (
-            bun.map((item, index) => (
-              <ConstructorElement
-                key={item._id}
-                index={index}
-                thumbnail={item.image}
-                price={item.price}
-                text={item.name}
-                isLocked={true}
-                type="bottom"
-              />
-            ))
-          )}
-        </div>
-      </div>
-      <div className="mr-4">
-        <span className="text text_type_digits-medium mr-10">
-          {!totalPrice ? 0 : totalPrice}
-          <CurrencyIcon></CurrencyIcon>
-        </span>
-        <Button
-          htmlType="button"
-          type="primary"
-          size="large"
-          onClick={handleClick}
-        >
-          Оформить заказ
-        </Button>
-        <Modal open={isOpen} onClose={closeModal} ModalTitle="">
+    <>
+      {isOpen ? (
+        <Modal onClose={closeModal} ModalTitle="">
           <OrderDetails />
         </Modal>
-      </div>
-    </section>
+      ) : null}
+      <section className={className} ref={dropTarget}>
+        <div className={classNameMainField}>
+          <div
+            className={`${classNameBun} ${isHover ? styles.onHoverTop : ""}`}
+          >
+            {bun.length === 0 ? (
+              <div className={classNameTopIngredient}>
+                <p className={classNameIngredientText}>
+                  Добавьте булку из ингредиентов слева
+                </p>
+              </div>
+            ) : (
+              bun.map((item, index) => (
+                <ConstructorElement
+                  key={item.id}
+                  index={index}
+                  thumbnail={item.image}
+                  price={item.price}
+                  text={`${item.name} (верх)`}
+                  isLocked={true}
+                  type="top"
+                />
+              ))
+            )}
+          </div>
+          <div
+            className={`${classNameMain} ${
+              isHover ? styles.onHoverMiddle : ""
+            }`}
+          >
+            {ingredients.map((item, index) => (
+              <BurgerConstructorElement key={item.id} index={index} {...item} />
+            ))}
+          </div>
+          <div
+            className={`${classNameBun} ${isHover ? styles.onHoverBottom : ""}`}
+          >
+            {bun.length === 0 ? (
+              <div className={classNameBottomIngredient}>
+                <p className={classNameIngredientText}>
+                  Добавьте булку из ингредиентов слева
+                </p>
+              </div>
+            ) : (
+              bun.map((item, index) => (
+                <ConstructorElement
+                  key={item.id}
+                  index={index}
+                  thumbnail={item.image}
+                  price={item.price}
+                  text={`${item.name} (низ)`}
+                  isLocked={true}
+                  type="bottom"
+                />
+              ))
+            )}
+          </div>
+        </div>
+        <div className="mr-4">
+          <span className="text text_type_digits-medium mr-10">
+            {!totalPrice ? 0 : totalPrice}
+            <CurrencyIcon></CurrencyIcon>
+          </span>
+          <Button
+            htmlType="button"
+            type="primary"
+            size="large"
+            onClick={handleClick}
+          >
+            Оформить заказ
+          </Button>
+          {/* <Modal onClose={closeModal} ModalTitle="">
+            <OrderDetails />
+          </Modal> */}
+        </div>
+      </section>
+    </>
   );
-};
-
-BurgerConstructor.propTypes = {
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
 };
 
 export default BurgerConstructor;

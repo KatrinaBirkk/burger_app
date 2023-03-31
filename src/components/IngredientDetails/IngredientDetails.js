@@ -1,6 +1,7 @@
-import styles from "./ingredientDetails.module.css";
+import styles from "./ingredient-details.module.css";
+import PropTypes from "prop-types";
 
-const IngredientDetails = (data) => {
+const IngredientDetails = (props) => {
   const classNameDetails = styles.ingredientDetails;
   const classNameTable = styles.ingredientDetailsTable;
 
@@ -8,10 +9,10 @@ const IngredientDetails = (data) => {
     <div className={classNameDetails}>
       <img
         className="cardPicture"
-        src={data.data.image_large}
-        alt={data.data.name}
+        src={props.data.image_large}
+        alt={props.data.name}
       ></img>
-      <p className="text text_type_main-medium">{data.data.name}</p>
+      <p className="text text_type_main-medium">{props.data.name}</p>
       <div className={classNameTable}>
         <p className="text text_type_main-small text_color_inactive">
           Калории, ккал
@@ -24,20 +25,24 @@ const IngredientDetails = (data) => {
           Углеводы, г
         </p>
         <p className="text text_type_main-small text_type_digits-default">
-          {data.data.calories}
+          {props.data.calories}
         </p>
         <p className="text text_type_main-small text_type_digits-default">
-          {data.data.proteins}
+          {props.data.proteins}
         </p>
         <p className="text text_type_main-small text_type_digits-default">
-          {data.data.fat}
+          {props.data.fat}
         </p>
         <p className="text text_type_main-small text_type_digits-default">
-          {data.data.carbohydrates}
+          {props.data.carbohydrates}
         </p>
       </div>
     </div>
   );
+};
+
+IngredientDetails.propTypes = {
+  data: PropTypes.object.isRequired,
 };
 
 export default IngredientDetails;

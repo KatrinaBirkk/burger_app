@@ -1,9 +1,10 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import styles from "./app-header.module.css";
 
 const NavButton = (props) => {
   return (
     <Button
-      className="button-inactive"
+      className={styles.button_inactive}
       htmlType="button"
       type="secondary"
       size="medium"
