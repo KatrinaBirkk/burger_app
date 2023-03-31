@@ -10,14 +10,16 @@ import {
 
 const AppHeader = () => {
   return (
-    <div className={styles.container}>
-      <nav className={styles.navMenu}>
-        <NavButton text="Конструктор" iconName={BurgerIcon} />
-        <NavButton text="Лента заказов" iconName={ListIcon} />
-        <LogoPicture />
-        <NavButton text="Личный кабинет" iconName={ProfileIcon} />
-      </nav>
-    </div>
+    <header>
+      <div className={styles.container}>
+        <nav className={styles.navMenu}>
+          <NavButton text="Конструктор" iconName={BurgerIcon} />
+          <NavButton text="Лента заказов" iconName={ListIcon} />
+          <LogoPicture />
+          <NavButton text="Личный кабинет" iconName={ProfileIcon} />
+        </nav>
+      </div>
+    </header>
   );
 };
 

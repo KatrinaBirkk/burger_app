@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRef } from "react";
 import { sortListItems } from "../../services/actions/ingredientsList";
 import PropTypes from "prop-types";
+import styles from "./burger-constructor.module.css";
 
 const BurgerConstructorElement = (item, index) => {
   const { ingredients } = useSelector((state) => state.items);
@@ -69,16 +70,7 @@ const BurgerConstructorElement = (item, index) => {
     });
   };
   return (
-    <div
-      ref={dragDropRef}
-      style={{
-        opacity,
-        display: "flex",
-        gap: "16px",
-        alignItems: "center",
-        width: 568,
-      }}
-    >
+    <div ref={dragDropRef} className={styles.container} style={{ opacity }}>
       <DragIcon type="primary" />
       <ConstructorElement
         thumbnail={item.image}

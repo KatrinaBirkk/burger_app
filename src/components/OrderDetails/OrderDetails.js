@@ -5,7 +5,9 @@ const OrderDetails = () => {
   const { order, sendRequest, sendFailed } = useSelector(
     (state) => state.items
   );
-
+  console.log(order);
+  // console.log(sendRequest);
+  // console.log(sendFailed);
   if (sendFailed) {
     return <p>Произошла ошибка при получении данных</p>;
   } else if (sendRequest) {

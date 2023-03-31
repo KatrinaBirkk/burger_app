@@ -10,8 +10,6 @@ import { useDrag } from "react-dnd";
 const ProdCard = ({ ...item }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // const _id = item._id;
-
   function openModal() {
     setIsOpen(true);
   }
@@ -30,9 +28,15 @@ const ProdCard = ({ ...item }) => {
 
   return (
     <>
-      <Modal open={isOpen} onClose={closeModal} ModalTitle="Детали ингредиента">
-        <IngredientDetails data={item} />
-      </Modal>
+      {isOpen ? (
+        <Modal
+          // open={isOpen}
+          onClose={closeModal}
+          ModalTitle="Детали ингредиента"
+        >
+          <IngredientDetails data={item} />
+        </Modal>
+      ) : null}
       <div style={{ opacity }}>
         <div className={styles.prodCard} onClick={openModal}>
           <img

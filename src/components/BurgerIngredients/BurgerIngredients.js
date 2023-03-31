@@ -130,8 +130,4 @@ const BurgerIngredients = () => {
   }
 };
 
-BurgerIngredients.propTypes = {
-  items: PropTypes.arrayOf(item),
-};
-
 export default BurgerIngredients;

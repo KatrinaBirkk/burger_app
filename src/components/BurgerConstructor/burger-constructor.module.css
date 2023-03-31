@@ -57,6 +57,14 @@
   color: #f2f2f3;
 }
 
+.container {
+  /* opacity; */
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  width: 568px;
+}
+
 .onHoverTop {
   border-radius: 88px 88px 40px 40px;
   box-shadow: 0 0 5px #3c39ec;

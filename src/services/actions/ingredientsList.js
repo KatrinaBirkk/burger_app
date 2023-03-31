@@ -39,6 +39,9 @@ export function getOrderNumber(info) {
             order: res,
           });
         }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 }
@@ -70,6 +73,11 @@ export function getIngredients() {
             type: GET_INGREDIENTS_FAILED,
           });
         }
+      })
+      .catch((err) => {
+        dispatch({
+          type: GET_INGREDIENTS_FAILED,
+        });
       });
   };
 }

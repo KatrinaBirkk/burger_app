@@ -8,9 +8,7 @@ import styles from "./app.module.css";
 function App() {
   return (
     <div className={styles.app}>
-      <header>
-        <AppHeader />
-      </header>
+      <AppHeader />
       <DndProvider backend={HTML5Backend}>
         <main className={styles.menuScreen}>
           <BurgerIngredients />

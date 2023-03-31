@@ -98,79 +98,92 @@ const BurgerConstructor = () => {
   const classNameBottomIngredient = styles.constructorBottomIngredient;
   const classNameIngredientText = styles.ingredientText;
 
+  // if (isOpen) {
+
   return (
-    <section className={className} ref={dropTarget}>
-      <div className={classNameMainField}>
-        <div className={`${classNameBun} ${isHover ? styles.onHoverTop : ""}`}>
-          {bun.length === 0 ? (
-            <div className={classNameTopIngredient}>
-              <p className={classNameIngredientText}>
-                Добавьте булку из ингредиентов слева
-              </p>
-            </div>
-          ) : (
-            bun.map((item, index) => (
-              <ConstructorElement
-                key={item.id}
-                index={index}
-                thumbnail={item.image}
-                price={item.price}
-                text={`${item.name} (верх)`}
-                isLocked={true}
-                type="top"
-              />
-            ))
-          )}
-        </div>
-        <div
-          className={`${classNameMain} ${isHover ? styles.onHoverMiddle : ""}`}
-        >
-          {ingredients.map((item, index) => (
-            <BurgerConstructorElement key={item.id} index={index} {...item} />
-          ))}
-        </div>
-        <div
-          className={`${classNameBun} ${isHover ? styles.onHoverBottom : ""}`}
-        >
-          {bun.length === 0 ? (
-            <div className={classNameBottomIngredient}>
-              <p className={classNameIngredientText}>
-                Добавьте булку из ингредиентов слева
-              </p>
-            </div>
-          ) : (
-            bun.map((item, index) => (
-              <ConstructorElement
-                key={item.id}
-                index={index}
-                thumbnail={item.image}
-                price={item.price}
-                text={`${item.name} (низ)`}
-                isLocked={true}
-                type="bottom"
-              />
-            ))
-          )}
-        </div>
-      </div>
-      <div className="mr-4">
-        <span className="text text_type_digits-medium mr-10">
-          {!totalPrice ? 0 : totalPrice}
-          <CurrencyIcon></CurrencyIcon>
-        </span>
-        <Button
-          htmlType="button"
-          type="primary"
-          size="large"
-          onClick={handleClick}
-        >
-          Оформить заказ
-        </Button>
-        <Modal open={isOpen} onClose={closeModal} ModalTitle="">
+    <>
+      {isOpen ? (
+        <Modal onClose={closeModal} ModalTitle="">
           <OrderDetails />
         </Modal>
-      </div>
-    </section>
+      ) : null}
+      <section className={className} ref={dropTarget}>
+        <div className={classNameMainField}>
+          <div
+            className={`${classNameBun} ${isHover ? styles.onHoverTop : ""}`}
+          >
+            {bun.length === 0 ? (
+              <div className={classNameTopIngredient}>
+                <p className={classNameIngredientText}>
+                  Добавьте булку из ингредиентов слева
+                </p>
+              </div>
+            ) : (
+              bun.map((item, index) => (
+                <ConstructorElement
+                  key={item.id}
+                  index={index}
+                  thumbnail={item.image}
+                  price={item.price}
+                  text={`${item.name} (верх)`}
+                  isLocked={true}
+                  type="top"
+                />
+              ))
+            )}
+          </div>
+          <div
+            className={`${classNameMain} ${
+              isHover ? styles.onHoverMiddle : ""
+            }`}
+          >
+            {ingredients.map((item, index) => (
+              <BurgerConstructorElement key={item.id} index={index} {...item} />
+            ))}
+          </div>
+          <div
+            className={`${classNameBun} ${isHover ? styles.onHoverBottom : ""}`}
+          >
+            {bun.length === 0 ? (
+              <div className={classNameBottomIngredient}>
+                <p className={classNameIngredientText}>
+                  Добавьте булку из ингредиентов слева
+                </p>
+              </div>
+            ) : (
+              bun.map((item, index) => (
+                <ConstructorElement
+                  key={item.id}
+                  index={index}
+                  thumbnail={item.image}
+                  price={item.price}
+                  text={`${item.name} (низ)`}
+                  isLocked={true}
+                  type="bottom"
+                />
+              ))
+            )}
+          </div>
+        </div>
+        <div className="mr-4">
+          <span className="text text_type_digits-medium mr-10">
+            {!totalPrice ? 0 : totalPrice}
+            <CurrencyIcon></CurrencyIcon>
+          </span>
+          <Button
+            htmlType="button"
+            type="primary"
+            size="large"
+            onClick={handleClick}
+          >
+            Оформить заказ
+          </Button>
+          {/* <Modal onClose={closeModal} ModalTitle="">
+            <OrderDetails />
+          </Modal> */}
+        </div>
+      </section>
+    </>
   );
 };
 
