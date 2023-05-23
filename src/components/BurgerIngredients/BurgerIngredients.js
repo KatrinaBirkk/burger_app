@@ -1,7 +1,7 @@
 import ProdCard from "./ProdCard";
 import { useInView } from "react-intersection-observer";
-import PropTypes from "prop-types";
-import { item } from "../BurgerConstructor/BurgerConstructorElement";
+// import PropTypes from "prop-types";
+// import { item } from "../BurgerConstructor/BurgerConstructorElement";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-ingredients.module.css";
 import { useRef, useEffect, useState } from "react";

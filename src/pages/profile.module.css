@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  gap: 60px;
+  width: 1240px;
+  margin: auto;
+  padding-top: 120px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  /* justify-content: flex-start; */
+  /* margin-top: 180px; */
+  /* margin: auto; */
+  /* padding-top: 180px; */
+  gap: 24px;
+  flex-direction: column;
+  max-width: 480px;
+  max-height: 430px;
+}
+
+.menu {
+  /* margin-left: 380px; */
+  min-width: 320px;
+}
+
+.header {
+  margin: 0;
+  line-height: 64px;
+}

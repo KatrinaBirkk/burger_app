@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { useDrop } from "react-dnd";
 import OrderDetails from "../OrderDetails/OrderDetails";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import {
   ADD_INGREDIENT,
   INCREASE_INGREDIENT,
