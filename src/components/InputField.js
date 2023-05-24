@@ -2,7 +2,7 @@ import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useRef, useState } from "react";
 
 const InputField = (props) => {
-  const [value, setValue] = useState("value");
+  // const [value, setValue] = useState("");
   const inputRef = useRef(null);
   const onIconClick = () => {
     setTimeout(() => inputRef.current.focus(), 0);
@@ -12,7 +12,8 @@ const InputField = (props) => {
     <Input
       type={props.text}
       placeholder={props.placeholder}
-      onChange={(e) => setValue(e.target.value)}
+      // onChange={(e) => setValue(e.target.value)}
+      onChange={props.onChange}
       icon={"CurrencyIcon"}
       value={props.value}
       name={props.name}

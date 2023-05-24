@@ -2,14 +2,14 @@ import { PasswordInput } from "@ya.praktikum/react-developer-burger-ui-component
 import { useState } from "react";
 
 const PasswordInputField = (props) => {
-  const [value, setValue] = useState("password");
-  const onChange = (e) => {
-    setValue(e.target.value);
-  };
+  // const [value, setValue] = useState("");
+  // const onChange = (e) => {
+  //   setValue(e.target.value);
+  // };
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <PasswordInput
-        onChange={onChange}
+        onChange={props.onChange}
         value={props.value}
         name={props.name}
         extraClass="mb-2"

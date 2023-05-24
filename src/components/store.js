@@ -1,6 +1,7 @@
 import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { itemsReducer } from "../services/reducers/ingredientsList";
 import { ingredientInfoReducer } from "../services/reducers/ingredientInfo";
+import { userInfoReducer } from "../services/reducers/userInfo";
 import thunk from "redux-thunk";
 
 const composeEnhancers =
@@ -13,5 +14,6 @@ const enhancer = composeEnhancers(applyMiddleware(thunk));
 const rootReducer = combineReducers({
   items: itemsReducer,
   info: ingredientInfoReducer,
+  user: userInfoReducer,
 });
 export const store = createStore(rootReducer, enhancer);

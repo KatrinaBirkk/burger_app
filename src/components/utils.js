@@ -6,7 +6,8 @@ export const totalPriceSelector = (state) => {
 };
 
 export const _checkResponse = (res) => {
-  if (res.ok) {
+  if (res.ok || res.success) {
+    console.log(res);
     return res.json();
   }
   return Promise.reject(`Ошибка ${res.status}`);

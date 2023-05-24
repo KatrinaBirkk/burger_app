@@ -3,6 +3,7 @@ import PasswordInputField from "../components/PasswordInputField";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function ProfilePage() {
         <h3 className="text text_type_main-large mb-6 mt-4">Выход</h3>
       </div>
       <div className={styles.form}>
-        <InputField placeholder={"Имя"} value={"Mark"} />
+        <InputField placeholder={"Имя"} value={"something"} />
         <InputField placeholder={"Логин"} value={"mail@stellar.burgers"} />
         <PasswordInputField placeholder={"Пароль"} value={"********"} />
       </div>

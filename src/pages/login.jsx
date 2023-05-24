@@ -4,16 +4,45 @@ import PasswordInputField from "../components/PasswordInputField";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login.module.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { authUser } from "../services/actions/userInfo";
 
 function LoginPage() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const [form, setValue] = useState({ email: "", password: "" });
+
+  const handleClick = () => {
+    dispatch(authUser(form.email, form.password));
+    console.log(form.email);
+  };
+  const onChange = (e) => {
+    setValue({ ...form, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className={styles.container}>
       <h3 className={styles.header}>Вход</h3>
-      <InputField placeholder={"Логин"} />
-      <PasswordInputField placeholder={"Пароль"} />
-      <Button htmlType="button" type="primary" size="medium">
+      <InputField
+        placeholder={"Логин"}
+        name={"email"}
+        value={form.email}
+        onChange={onChange}
+      />
+      <PasswordInputField
+        placeholder={"Пароль"}
+        name={"password"}
+        value={form.password}
+        onChange={onChange}
+      />
+      <Button
+        htmlType="button"
+        type="primary"
+        size="medium"
+        onClick={handleClick}
+      >
         Войти
       </Button>
       <ul className={styles.list}>
