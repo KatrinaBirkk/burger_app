@@ -1,8 +1,10 @@
 import {
-  AUTH_SUCCESS,
+  AUTH_REQUEST_SUCCESS,
   AUTH_REQUEST,
   SUBMIT_INFO_REQUEST,
   SUBMIT_INFO_SUCCESS,
+  ACCESS_REQUEST,
+  ACCESS_REQUEST_SUCCESS,
 } from "../actions/userInfo";
 
 const initialState = {
@@ -13,6 +15,7 @@ const initialState = {
   token: null,
   accessToken: null,
   refreshToken: null,
+  accessRequest: false,
 };
 
 export const userInfoReducer = (state = initialState, action) => {
@@ -39,7 +42,7 @@ export const userInfoReducer = (state = initialState, action) => {
         authRequest: true,
       };
     }
-    case AUTH_SUCCESS: {
+    case AUTH_REQUEST_SUCCESS: {
       return {
         ...state,
         email: action.email,
@@ -47,6 +50,20 @@ export const userInfoReducer = (state = initialState, action) => {
         accessToken: action.accessToken,
         userInfoRequestFailed: false,
         userInfoRequest: false,
+      };
+    }
+    case ACCESS_REQUEST: {
+      return {
+        ...state,
+        accessRequest: true,
+      };
+    }
+    case ACCESS_REQUEST_SUCCESS: {
+      return {
+        ...state,
+        accessRequest: false,
+        name: action.name,
+        email: action.email,
       };
     }
     default: {
