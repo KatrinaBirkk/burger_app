@@ -22,7 +22,7 @@ const AppHeader = () => {
           text="Личный кабинет"
           iconName={ProfileIcon}
           onClick={() => {
-            navigate("/register");
+            navigate("/login");
           }}
         />
       </nav>

@@ -4,9 +4,10 @@ import PasswordInputField from "../components/PasswordInputField";
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./login.module.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { authUser } from "../services/actions/userInfo";
+import { authUser } from "../services/actions/login";
+// import { userAuthentification } from "../services/actions/auth";
 // import { setCookie } from "../components/utils";
 
 function LoginPage() {
@@ -14,24 +15,60 @@ function LoginPage() {
   const dispatch = useDispatch();
 
   const [form, setValue] = useState({ email: "", password: "" });
+  // const [user, setUser] = useState(null);
 
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });
   };
 
-  const loginRequest = () => {
+  // const loginRequest = () => {
+  //   dispatch(authUser(form.email, form.password));
+  //   console.log(form.password);
+  // };
+
+  // const { accessToken, refreshToken } = useSelector((state) => state.user);
+  // console.log(accessToken);
+  // console.log(refreshToken);
+
+  const signIn = () => {
     dispatch(authUser(form.email, form.password));
-    navigate("/profile");
-    // console.log(form.email);
   };
 
-  const { accessToken, refreshToken } = useSelector((state) => state.user);
-  console.log(accessToken);
-  console.log(refreshToken);
+  // localStorage.setItem("token", accessToken);
+  // let accessKey = localStorage.getItem("token");
+  // accessKey > 0 ? console.log("success") : console.log("fail");
+  // async function signIn() {
+  //   let authResult = await LoginRequest();
+  //   await new Promise((resolve, reject) => setTimeout(resolve, 3000));
+  //   if (accessToken) {
+  //     console.log("success");
+  //   } else {
+  //     console.log("error");
+  //   }
 
-  const signIn = async () => {
-    loginRequest();
-  };
+  // let promise = new Promise((loginRequest) => {
+  //   setTimeout(() => loginRequest(), 1000);
+  // });
+
+  // let authResult = await loginRequest();
+  // await new Promise((resolve, reject) => setTimeout(resolve, 1000));
+  // console.log(accessRequest, accessFailed);
+  // if (accessFailed === true) {
+  //   alert("Неверный логин или пароль");
+  // } else {
+  //   navigate("/profile");
+  // }
+
+  // const signIn = async () => {
+  //   await loginRequest();
+  //   if (accessFailed === true) {
+  //     alert("Неверный логин или пароль");
+  //     console.log(accessFailed);
+  //   } else {
+  //     console.log(accessFailed);
+  //     navigate("/profile");
+  //   }
+  // };
 
   return (
     <div className={styles.container}>

@@ -8,14 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 
 function ProfilePage() {
   // const navigate = useNavigate();
-  const [form, setValue] = useState({ email: "", password: "" });
 
   const onChange = (e) => {
-    setValue({ ...form, [e.target.name]: e.target.value });
+    // setValue({ ...form, [e.target.name]: e.target.value });
+    setValue({ ...form, name, email });
   };
-  const { name, email } = useSelector((state) => state.user);
-  console.log(name);
-  console.log(email);
+  const { name, email, password } = useSelector((state) => state.user);
+  // console.log(name);
+  // console.log(email);
+  localStorage.setItem("name", name);
+  const [form, setValue] = useState({ name, email, password });
 
   return (
     <div className={styles.container}>
@@ -29,7 +31,7 @@ function ProfilePage() {
         <InputField placeholder={"Логин"} value={email} onChange={onChange} />
         <PasswordInputField
           placeholder={"Пароль"}
-          value={"********"}
+          value={localStorage.getItem("password")}
           onChange={onChange}
         />
       </div>
