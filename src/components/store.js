@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import { itemsReducer } from "../services/reducers/ingredientsList";
 import { ingredientInfoReducer } from "../services/reducers/ingredientInfo";
 import { authChecking } from "../services/reducers/auth";
-import { userInfoReducer } from "../services/reducers/userInfo";
+import { getUserInfo } from "../services/reducers/userInfo";
 import thunk from "redux-thunk";
 import { authReducer } from "../services/reducers/login";
 
@@ -18,5 +18,6 @@ const rootReducer = combineReducers({
   info: ingredientInfoReducer,
   user: authReducer,
   auth: authChecking,
+  // userRegister: getUserInfo,
 });
 export const store = createStore(rootReducer, enhancer);

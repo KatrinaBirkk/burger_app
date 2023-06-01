@@ -15,8 +15,6 @@ function RegisterPage() {
 
   const handleClick = () => {
     dispatch(registerUser(form.email, form.password, form.name));
-    console.log(form.name);
-    navigate("/login");
   };
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });

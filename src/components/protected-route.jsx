@@ -1,9 +1,11 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { getCookie } from "./utils";
 import React from "react";
 
 const Protected = ({ onlyUnAuth = false, component }) => {
-  const isAuthChecked = useSelector((state) => state.auth.authChecked);
+  // const isAuthChecked = useSelector((state) => state.auth.authChecked);
+  const isAuthChecked = getCookie("authChecked");
   const user = useSelector((state) => state.user);
   const location = useLocation();
 
@@ -14,7 +16,7 @@ const Protected = ({ onlyUnAuth = false, component }) => {
     return null;
   }
 
-  if (onlyUnAuth && user && isAuthChecked === true) {
+  if (onlyUnAuth && user && isAuthChecked === "true") {
     console.log("onlyUnAuth");
     console.log(onlyUnAuth);
     const { from } = location.state || { from: { pathname: "/" } };

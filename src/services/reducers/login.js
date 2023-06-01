@@ -2,11 +2,15 @@ import {
   AUTH_REQUEST_SUCCESS,
   AUTH_REQUEST,
   AUTH_REQUEST_FAILED,
+  LOGOUT_REQUEST,
 } from "../actions/login";
+
+import { SUBMIT_INFO_REQUEST, SUBMIT_INFO_SUCCESS } from "../actions/userInfo";
 
 const initialState = {
   name: null,
   email: null,
+  password: null,
   token: null,
   accessToken: null,
   refreshToken: null,
@@ -37,6 +41,31 @@ export const authReducer = (state = initialState, action) => {
       return {
         ...state,
         authRequest: false,
+        authFailed: true,
+      };
+    }
+    case SUBMIT_INFO_REQUEST: {
+      return {
+        ...state,
+        userInfoRequest: true,
+      };
+    }
+    case SUBMIT_INFO_SUCCESS: {
+      return {
+        ...state,
+        email: action.email,
+        token: action.token,
+        accessToken: action.accessToken,
+        refreshToken: action.refreshToken,
+        name: action.name,
+        userInfoRequestFailed: false,
+        userInfoRequest: false,
+      };
+    }
+    case LOGOUT_REQUEST: {
+      return {
+        ...state,
+        token: null,
         authFailed: true,
       };
     }

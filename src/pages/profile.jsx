@@ -5,9 +5,18 @@ import styles from "./profile.module.css";
 // import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../services/actions/login";
 
 function ProfilePage() {
   // const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const token = localStorage.getItem("RToken");
+  console.log(token);
+
+  const handleClick = () => {
+    dispatch(logout(token));
+  };
 
   const onChange = (e) => {
     // setValue({ ...form, [e.target.name]: e.target.value });
@@ -16,7 +25,7 @@ function ProfilePage() {
   const { name, email, password } = useSelector((state) => state.user);
   // console.log(name);
   // console.log(email);
-  localStorage.setItem("name", name);
+
   const [form, setValue] = useState({ name, email, password });
 
   return (
@@ -24,11 +33,24 @@ function ProfilePage() {
       <div className={styles.menu}>
         <h3 className="text text_type_main-large mb-6 mt-4">Профиль</h3>
         <h3 className="text text_type_main-large mb-6 mt-4">История заказов</h3>
-        <h3 className="text text_type_main-large mb-6 mt-4">Выход</h3>
+        <h3
+          className="text text_type_main-large mb-6 mt-4"
+          onClick={handleClick}
+        >
+          Выход
+        </h3>
       </div>
       <div className={styles.form}>
-        <InputField placeholder={"Имя"} value={name} onChange={onChange} />
-        <InputField placeholder={"Логин"} value={email} onChange={onChange} />
+        <InputField
+          placeholder={"Имя"}
+          value={localStorage.getItem("name")}
+          onChange={onChange}
+        />
+        <InputField
+          placeholder={"Логин"}
+          value={localStorage.getItem("login")}
+          onChange={onChange}
+        />
         <PasswordInputField
           placeholder={"Пароль"}
           value={localStorage.getItem("password")}
