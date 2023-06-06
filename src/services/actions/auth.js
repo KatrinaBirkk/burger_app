@@ -1,4 +1,4 @@
-import { _checkResponse, setCookie } from "../../components/utils";
+import { _checkResponse } from "../../components/utils";
 
 export const AUTH_CHECKING_REQUEST = "AUTH_CHECKING_REQUEST";
 export const AUTH_CHECKING_SUCCESS = "AUTH_CHECKING_SUCCESS";

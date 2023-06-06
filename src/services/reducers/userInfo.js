@@ -1,9 +1,9 @@
 import {
   SUBMIT_INFO_REQUEST,
   SUBMIT_INFO_SUCCESS,
-  // ACCESS_REQUEST,
-  // ACCESS_REQUEST_SUCCESS,
-  // ACCESS_REQUEST_FAILED,
+  GET_INFO_REQUEST,
+  GET_INFO_SUCCESS,
+  // GET_INFO_FAILED,
 } from "../actions/userInfo";
 
 const initialState = {
@@ -27,34 +27,31 @@ export const getUserInfo = (state = initialState, action) => {
     case SUBMIT_INFO_SUCCESS: {
       return {
         ...state,
+        name: action.name,
         email: action.email,
         token: action.token,
         accessToken: action.accessToken,
         refreshToken: action.refreshToken,
+        userInfoRequestFailed: false,
+        userInfoRequest: false,
+      };
+    }
+    case GET_INFO_REQUEST: {
+      return {
+        ...state,
+        userInfoRequest: true,
+      };
+    }
+    case GET_INFO_SUCCESS: {
+      return {
+        ...state,
         name: action.name,
+        email: action.email,
         userInfoRequestFailed: false,
         userInfoRequest: false,
       };
     }
 
-    // case ACCESS_REQUEST: {
-    //   return {
-    //     ...state,
-    //     accessRequest: true,
-    //   };
-    // }
-    // case ACCESS_REQUEST_SUCCESS: {
-    //   return {
-    //     ...state,
-    //     accessRequest: false,
-    //     accessFailed: false,
-    //     name: action.name,
-    //     email: action.email,
-    //   };
-    // }
-    // case ACCESS_REQUEST_FAILED: {
-    //   return { ...state, accessFailed: true, accessRequest: false };
-    // }
     default: {
       return state;
     }

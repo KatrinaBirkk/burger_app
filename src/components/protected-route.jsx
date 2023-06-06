@@ -23,7 +23,7 @@ const Protected = ({ onlyUnAuth = false, component }) => {
     return <Navigate to={from} />;
   }
 
-  if (!onlyUnAuth && !user) {
+  if (!onlyUnAuth && isAuthChecked === false) {
     return <Navigate to="/login" state={{ from: location }} />;
   }
 

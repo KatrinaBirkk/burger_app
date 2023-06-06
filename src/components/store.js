@@ -18,6 +18,6 @@ const rootReducer = combineReducers({
   info: ingredientInfoReducer,
   user: authReducer,
   auth: authChecking,
-  // userRegister: getUserInfo,
+  userInfo: getUserInfo,
 });
 export const store = createStore(rootReducer, enhancer);

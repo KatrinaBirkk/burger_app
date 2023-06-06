@@ -6,6 +6,9 @@ export const SUBMIT_INFO_SUCCESS = "SUBMIT_INFO_SUCCESS";
 export const ACCESS_REQUEST = "ACCESS_REQUEST";
 export const ACCESS_REQUEST_SUCCESS = "ACCESS_REQUEST_SUCCESS";
 export const ACCESS_REQUEST_FAILED = "ACCESS_REQUEST_FAILED";
+export const GET_INFO_SUCCESS = "GET_INFO_SUCCESS";
+export const GET_INFO_REQUEST = "GET_INFO_REQUEST";
+export const GET_INFO_FAILED = "GET_INFO_FAILED";
 
 const API_URL = "https://norma.nomoreparties.space/api/auth/";
 
@@ -50,6 +53,46 @@ export function registerUser(email, password, name) {
       })
       .catch((error) => {
         console.log(error);
+      });
+  };
+}
+
+export function getUserInfo() {
+  return function (dispatch) {
+    dispatch({
+      type: GET_INFO_REQUEST,
+    });
+    fetch(`${API_URL}user`, {
+      method: "GET",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getCookie("token"),
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+    })
+      .then(_checkResponse)
+      .then((res) => {
+        if (res && res.success) {
+          console.log(res);
+          dispatch({
+            type: GET_INFO_SUCCESS,
+            name: res.user.name,
+            email: res.user.email,
+          });
+        } else {
+          dispatch({
+            type: GET_INFO_FAILED,
+          });
+        }
+      })
+      .catch((err) => {
+        dispatch({
+          type: GET_INFO_FAILED,
+        });
       });
   };
 }

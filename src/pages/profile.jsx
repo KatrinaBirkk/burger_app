@@ -3,13 +3,18 @@ import PasswordInputField from "../components/PasswordInputField";
 // import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./profile.module.css";
 // import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../services/actions/login";
+import { getUserInfo } from "../services/actions/userInfo";
 
 function ProfilePage() {
   // const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserInfo());
+  }, [dispatch]);
 
   const token = localStorage.getItem("RToken");
   console.log(token);
@@ -18,15 +23,15 @@ function ProfilePage() {
     dispatch(logout(token));
   };
 
-  const onChange = (e) => {
-    // setValue({ ...form, [e.target.name]: e.target.value });
-    setValue({ ...form, name, email });
-  };
-  const { name, email, password } = useSelector((state) => state.user);
-  // console.log(name);
-  // console.log(email);
+  // setValue({ ...form, name, email });
 
-  const [form, setValue] = useState({ name, email, password });
+  const { name, email } = useSelector((state) => state.userInfo);
+
+  const [form, setValue] = useState({ name, email });
+
+  const onChange = (e) => {
+    setValue({ ...form, [e.target.name]: e.target.value });
+  };
 
   return (
     <div className={styles.container}>
@@ -42,18 +47,21 @@ function ProfilePage() {
       </div>
       <div className={styles.form}>
         <InputField
+          name={"name"}
           placeholder={"Имя"}
-          value={localStorage.getItem("name")}
+          value={name}
           onChange={onChange}
         />
         <InputField
+          name={"email"}
           placeholder={"Логин"}
-          value={localStorage.getItem("login")}
+          value={email}
           onChange={onChange}
         />
         <PasswordInputField
+          name={"password"}
           placeholder={"Пароль"}
-          value={localStorage.getItem("password")}
+          value={"************"}
           onChange={onChange}
         />
       </div>
