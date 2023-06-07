@@ -1,14 +1,14 @@
 import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useRef, useState } from "react";
+// import { useRef, useState } from "react";
 
 const InputField = (props) => {
   // const [value, setValue] = useState("");
-  const inputRef = useRef(null);
-  const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
+  // const inputRef = useRef(null);
+  // const onIconClick = () => {
+  //   setTimeout(() => inputRef.current.focus(), 0);
 
-    alert("Icon Click Callback");
-  };
+  //   alert("Icon Click Callback");
+  // };
   return (
     <Input
       type={props.text}
@@ -19,8 +19,8 @@ const InputField = (props) => {
       value={props.value}
       name={props.name}
       error={false}
-      ref={inputRef}
-      onIconClick={onIconClick}
+      ref={props.inputRef}
+      onIconClick={props.onIconClick}
       errorText={"Ошибка"}
       size={"default"}
       extraClass="ml-1"

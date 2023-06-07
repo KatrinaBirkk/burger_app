@@ -9,6 +9,9 @@ export const ACCESS_REQUEST_FAILED = "ACCESS_REQUEST_FAILED";
 export const GET_INFO_SUCCESS = "GET_INFO_SUCCESS";
 export const GET_INFO_REQUEST = "GET_INFO_REQUEST";
 export const GET_INFO_FAILED = "GET_INFO_FAILED";
+export const UPDATE_INFO_REQUEST = "UPDATE_INFO_REQUEST";
+export const UPDATE_INFO_SUCCESS = "UPDATE_INFO_SUCCESS";
+export const UPDATE_INFO_FAILED = "UPDATE_INFO_FAILED";
 
 const API_URL = "https://norma.nomoreparties.space/api/auth/";
 
@@ -97,38 +100,41 @@ export function getUserInfo() {
   };
 }
 
-// export function getAccess() {
-//   return function (dispatch) {
-//     dispatch({
-//       type: ACCESS_REQUEST,
-//     });
-//     fetch(`${API_URL}user`, {
-//       method: "GET",
-//       mode: "cors",
-//       cache: "no-cache",
-//       credentials: "same-origin",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: "Barrier" + getCookie("token"),
-//       },
-//       redirect: "follow",
-//       referrerPolicy: "no-referrer",
-//     })
-//       .then(_checkResponse)
-//       .then((res) => {
-//         if (res && res.success) {
-//           console.log(res);
-//           dispatch({
-//             type: ACCESS_REQUEST_SUCCESS,
-//             name: res.user.name,
-//             email: res.user.email,
-//           });
-//         }
-//       })
-//       .catch((error) => {
-//         dispatch({
-//           type: ACCESS_REQUEST_FAILED,
-//         });
-//       });
-//   };
-// }
+export function updateUserInfo(name, email) {
+  return function (dispatch) {
+    dispatch({
+      type: UPDATE_INFO_REQUEST,
+    });
+    fetch(`${API_URL}user`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: getCookie("token"),
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+      }),
+    })
+      .then(_checkResponse)
+      .then((res) => {
+        if (res && res.success) {
+          console.log(res);
+          dispatch({
+            type: UPDATE_INFO_SUCCESS,
+            name: res.user.name,
+            email: res.user.email,
+          });
+        } else {
+          dispatch({
+            type: UPDATE_INFO_FAILED,
+          });
+        }
+      })
+      .catch((err) => {
+        dispatch({
+          type: UPDATE_INFO_FAILED,
+        });
+      });
+  };
+}

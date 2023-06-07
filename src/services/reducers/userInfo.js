@@ -3,7 +3,9 @@ import {
   SUBMIT_INFO_SUCCESS,
   GET_INFO_REQUEST,
   GET_INFO_SUCCESS,
-  // GET_INFO_FAILED,
+  UPDATE_INFO_REQUEST,
+  UPDATE_INFO_SUCCESS,
+  UPDATE_INFO_FAILED,
 } from "../actions/userInfo";
 
 const initialState = {
@@ -14,6 +16,7 @@ const initialState = {
   token: null,
   accessToken: null,
   refreshToken: null,
+  updateInfoRequest: null,
 };
 
 export const getUserInfo = (state = initialState, action) => {
@@ -51,7 +54,26 @@ export const getUserInfo = (state = initialState, action) => {
         userInfoRequest: false,
       };
     }
-
+    case UPDATE_INFO_REQUEST: {
+      return {
+        ...state,
+        updateInfoRequest: true,
+      };
+    }
+    case UPDATE_INFO_SUCCESS: {
+      return {
+        ...state,
+        name: action.name,
+        email: action.email,
+        updateInfoRequest: false,
+      };
+    }
+    case UPDATE_INFO_FAILED: {
+      return {
+        ...state,
+        updateInfoRequest: false,
+      };
+    }
     default: {
       return state;
     }
