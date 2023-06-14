@@ -69,9 +69,11 @@ function App() {
         <Route
           path="ingredients/:id"
           element={
-            <Modal ModalTitle="Детали ингредиента" onClose={onModalClose}>
-              <IngredientsDetails items={items} />
-            </Modal>
+            location.key !== "default" ? (
+              <Modal ModalTitle="Детали ингредиента" onClose={onModalClose}>
+                <IngredientsDetails items={items} />
+              </Modal>
+            ) : null
           }
         />
       </Routes>
