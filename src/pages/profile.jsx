@@ -22,16 +22,8 @@ function ProfilePage() {
   const cancelChanges = () => {
     let email = localStorage.getItem("email");
     let name = localStorage.getItem("name");
-    // console.log(name);
-    // console.log(email);
     setValue({ name, email });
   };
-
-  // console.log(form.name);
-  // console.log(name);
-
-  // console.log(form.email);
-  // console.log(email);
 
   const formSubmit = () => {
     dispatch(updateUserInfo(form.name, form.email, token));

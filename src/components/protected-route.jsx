@@ -9,16 +9,11 @@ const Protected = ({ onlyUnAuth = false, component }) => {
   const user = useSelector((state) => state.user);
   const location = useLocation();
 
-  console.log(isAuthChecked);
-  console.log(user);
-
   if (isAuthChecked === false) {
     return null;
   }
 
   if (onlyUnAuth && user && isAuthChecked === "true") {
-    console.log("onlyUnAuth");
-    console.log(onlyUnAuth);
     const { from } = location.state || { from: { pathname: "/" } };
     return <Navigate to={from} />;
   }

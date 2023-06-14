@@ -23,8 +23,6 @@ function App() {
   }, [dispatch]);
 
   const items = JSON.parse(localStorage.getItem("items"));
-  console.log("items");
-  console.log(items);
 
   const location = useLocation();
   const background = location.state?.background;

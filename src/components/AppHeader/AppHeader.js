@@ -16,7 +16,6 @@ const AppHeader = () => {
   const navigate = useNavigate();
 
   const location = useLocation();
-  // console.log(location.pathname);
 
   return (
     <header className={styles.container}>

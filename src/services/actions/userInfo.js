@@ -44,7 +44,7 @@ export function registerUser(name, email, password) {
           localStorage.setItem("email", email);
           localStorage.setItem("password", password);
           localStorage.setItem("RToken", res.refreshToken);
-          console.log(res);
+
           dispatch({
             type: AUTH_CHECKING_SUCCESS,
           });
@@ -57,9 +57,7 @@ export function registerUser(name, email, password) {
           });
         }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 }
 
@@ -83,7 +81,6 @@ export function getUserInfo() {
       .then(_checkResponse)
       .then((res) => {
         if (res && res.success) {
-          console.log(res);
           localStorage.setItem("name", res.user.name);
           localStorage.setItem("email", res.user.email);
           dispatch({
@@ -124,7 +121,6 @@ export function updateUserInfo(name, email, token) {
       .then(_checkResponse)
       .then((res) => {
         if (res && res.success) {
-          console.log(res);
           localStorage.setItem("name", res.user.name);
           localStorage.setItem("email", res.user.email);
           dispatch({
@@ -135,8 +131,6 @@ export function updateUserInfo(name, email, token) {
         }
       })
       .catch((err) => {
-        console.log(err);
-        console.log(token);
         dispatch(refreshAccessToken(token));
       });
   };
@@ -159,7 +153,6 @@ export function refreshAccessToken(token) {
       .then(_checkResponse)
       .then((res) => {
         if (res && res.success) {
-          console.log(res);
           setCookie("authChecked", true);
           setCookie("token", res.accessToken);
           localStorage.setItem("RToken", res.refreshToken);
@@ -173,7 +166,6 @@ export function refreshAccessToken(token) {
         }
       })
       .catch((error) => {
-        console.log(error);
         dispatch({
           type: NEW_ACCESS_TOKEN_FAILED,
         });

@@ -16,49 +16,10 @@ function ForgotPasswordPage() {
   };
   const navigate = useNavigate();
 
-  // function checkResponse(res) {
-  //   // console.log("checkResponse");
-  //   // console.log(res);
-  //   console.log(res.success);
-  //   if (res && res.success) {
-  //     navigate("/reset-password");
-  //     return res;
-  //   } else if (res && !res.success) {
-  //     navigate("/");
-  //     return res;
-  //   }
-  //   console.log("Error");
-  // }
-
-  // function sendEmail(res) {
-  //   res.success ? navigate("/reset-password") : navigate("/");
-  // }
-
-  // const newPasswordRequest = async (email) => {
-  //   return await fetch("https://norma.nomoreparties.space/api/password-reset", {
-  //     method: "POST",
-  //     mode: "cors",
-  //     cache: "no-cache",
-  //     credentials: "same-origin",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     redirect: "follow",
-  //     referrerPolicy: "no-referrer",
-  //     body: JSON.stringify({
-  //       email: email,
-  //     }),
-  //   })
-  //     .then((res) => res.json())
-  //     .then((res) => checkResponse(res));
-  // };
-
   const newPasswordRequest = () => {
     dispatch(passwordRequest(form.email));
     navigate("/reset-password");
   };
-
-  console.log(form.email);
 
   return (
     <div className={styles.container}>

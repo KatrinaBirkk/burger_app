@@ -30,18 +30,9 @@ export function authUser(email, password) {
       }),
     })
       .then(_checkResponse)
-      // .then((res) => {
-      //   console.log(res);
-      //   if (res) {
-      //     dispatch({
-      //       type: AUTH_CHECKING_SUCCESS,
-      //     });
-      //   }
-      // })
 
       .then((res) => {
         if (res && res.success) {
-          console.log(res);
           setCookie("authChecked", true);
           dispatch({
             type: AUTH_CHECKING_SUCCESS,
@@ -88,7 +79,6 @@ export function logout(token) {
       .then(_checkResponse)
       .then((res) => {
         if (res && res.success) {
-          console.log(res);
           setCookie("authChecked", false);
           deleteCookie("token");
           localStorage.removeItem("name");

@@ -29,7 +29,6 @@ const ProdCard = ({ ...item }) => {
   });
 
   const location = useLocation();
-  console.log(location);
 
   return (
     <>
