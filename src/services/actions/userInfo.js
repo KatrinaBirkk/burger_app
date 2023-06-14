@@ -12,10 +12,13 @@ export const GET_INFO_FAILED = "GET_INFO_FAILED";
 export const UPDATE_INFO_REQUEST = "UPDATE_INFO_REQUEST";
 export const UPDATE_INFO_SUCCESS = "UPDATE_INFO_SUCCESS";
 export const UPDATE_INFO_FAILED = "UPDATE_INFO_FAILED";
+export const NEW_ACCESS_TOKEN_REQUEST = "NEW_ACCESS_TOKEN_REQUEST";
+export const NEW_ACCESS_TOKEN_SUCCESS = "NEW_ACCESS_TOKEN_SUCCESS";
+export const NEW_ACCESS_TOKEN_FAILED = "NEW_ACCESS_TOKEN_FAILED";
 
 const API_URL = "https://norma.nomoreparties.space/api/auth/";
 
-export function registerUser(email, password, name) {
+export function registerUser(name, email, password) {
   return function (dispatch) {
     dispatch({
       type: SUBMIT_INFO_REQUEST,
@@ -26,9 +29,9 @@ export function registerUser(email, password, name) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        name: name,
         email: email,
         password: password,
-        name: name,
       }),
     })
       .then(_checkResponse)
@@ -38,8 +41,8 @@ export function registerUser(email, password, name) {
           setCookie("token", res.accessToken);
           setCookie("authChecked", true);
           localStorage.setItem("name", name);
+          localStorage.setItem("email", email);
           localStorage.setItem("password", password);
-          localStorage.setItem("login", email);
           localStorage.setItem("RToken", res.refreshToken);
           console.log(res);
           dispatch({
@@ -81,6 +84,8 @@ export function getUserInfo() {
       .then((res) => {
         if (res && res.success) {
           console.log(res);
+          localStorage.setItem("name", res.user.name);
+          localStorage.setItem("email", res.user.email);
           dispatch({
             type: GET_INFO_SUCCESS,
             name: res.user.name,
@@ -100,7 +105,7 @@ export function getUserInfo() {
   };
 }
 
-export function updateUserInfo(name, email) {
+export function updateUserInfo(name, email, token) {
   return function (dispatch) {
     dispatch({
       type: UPDATE_INFO_REQUEST,
@@ -120,20 +125,57 @@ export function updateUserInfo(name, email) {
       .then((res) => {
         if (res && res.success) {
           console.log(res);
+          localStorage.setItem("name", res.user.name);
+          localStorage.setItem("email", res.user.email);
           dispatch({
             type: UPDATE_INFO_SUCCESS,
             name: res.user.name,
             email: res.user.email,
           });
-        } else {
-          dispatch({
-            type: UPDATE_INFO_FAILED,
-          });
         }
       })
       .catch((err) => {
+        console.log(err);
+        console.log(token);
+        dispatch(refreshAccessToken(token));
+      });
+  };
+}
+
+export function refreshAccessToken(token) {
+  return function (dispatch) {
+    dispatch({
+      type: NEW_ACCESS_TOKEN_REQUEST,
+    });
+    fetch(`${API_URL}token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        token: token,
+      }),
+    })
+      .then(_checkResponse)
+      .then((res) => {
+        if (res && res.success) {
+          console.log(res);
+          setCookie("authChecked", true);
+          setCookie("token", res.accessToken);
+          localStorage.setItem("RToken", res.refreshToken);
+          dispatch({
+            type: NEW_ACCESS_TOKEN_SUCCESS,
+          });
+        } else {
+          dispatch({
+            type: NEW_ACCESS_TOKEN_FAILED,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
         dispatch({
-          type: UPDATE_INFO_FAILED,
+          type: NEW_ACCESS_TOKEN_FAILED,
         });
       });
   };

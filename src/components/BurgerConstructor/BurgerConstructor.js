@@ -5,7 +5,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerConstructorElement from "./BurgerConstructorElement";
 import styles from "./burger-constructor.module.css";
-import { totalPriceSelector } from "../utils";
+import { getCookie, totalPriceSelector } from "../utils";
 import Modal from "../Modal/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
@@ -19,10 +19,13 @@ import {
   INCREASE_INGREDIENT_BUN,
 } from "../../services/actions/ingredientsList";
 import { getOrderNumber } from "../../services/actions/ingredientsList";
+import { useNavigate } from "react-router-dom";
 
 const BurgerConstructor = () => {
   const { ingredients } = useSelector((state) => state.items);
   const { bun } = useSelector((state) => state.items);
+
+  const navigate = useNavigate();
 
   const totalPrice = useSelector(totalPriceSelector);
 
@@ -82,12 +85,20 @@ const BurgerConstructor = () => {
     }),
   });
 
+  const authChecked = getCookie("authChecked");
+  // console.log("authChecked");
+  // console.log(authChecked);
+
   const handleClick = () => {
-    const data = [...ingredients, ...bun].reduce((arrayId, item) => {
-      return arrayId.push(item), arrayId;
-    }, []);
-    dispatch(getOrderNumber(data));
-    openModal();
+    if (authChecked === "true") {
+      const data = [...ingredients, ...bun].reduce((arrayId, item) => {
+        return arrayId.push(item), arrayId;
+      }, []);
+      dispatch(getOrderNumber(data));
+      openModal();
+    } else {
+      navigate("/login");
+    }
   };
 
   const className = styles.burgerConstructor;
@@ -178,9 +189,6 @@ const BurgerConstructor = () => {
           >
             Оформить заказ
           </Button>
-          {/* <Modal onClose={closeModal} ModalTitle="">
-            <OrderDetails />
-          </Modal> */}
         </div>
       </section>
     </>

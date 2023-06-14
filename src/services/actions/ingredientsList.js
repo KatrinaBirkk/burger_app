@@ -64,6 +64,7 @@ export function getIngredients() {
       .then(_checkResponse)
       .then((res) => {
         if (res && res.success) {
+          localStorage.setItem("items", JSON.stringify(res.data));
           dispatch({
             type: GET_INGREDIENTS_SUCCESS,
             items: res.data,

@@ -11,7 +11,6 @@ export const AUTH_REQUEST_FAILED = "AUTH_REQUEST_FAILED";
 export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const PASSWORD_REQUEST = "PASSWORD_REQUEST";
 export const SUBMIT_PASSWORD_REQUEST = "SUBMIT_PASSWORD_REQUEST";
-export const NEW_ACCESS_TOKEN_REQUEST = "NEW_ACCESS_TOKEN_REQUEST";
 
 const API_URL = "https://norma.nomoreparties.space/api/auth/";
 
@@ -56,7 +55,7 @@ export function authUser(email, password) {
             accessToken: res.accessToken,
           });
           localStorage.setItem("name", res.user.name);
-          localStorage.setItem("login", res.user.email);
+          localStorage.setItem("email", res.user.email);
           localStorage.setItem("RToken", res.refreshToken);
         } else {
           dispatch({
@@ -93,9 +92,7 @@ export function logout(token) {
           setCookie("authChecked", false);
           deleteCookie("token");
           localStorage.removeItem("name");
-          // localStorage.removeItem("password");
-          localStorage.removeItem("login");
-          // localStorage.removeItem("RToken");
+          localStorage.removeItem("email");
         }
       });
   };
@@ -113,23 +110,6 @@ export function passwordRequest(email) {
       },
       body: JSON.stringify({
         email: email,
-      }),
-    }).then(_checkResponse);
-  };
-}
-
-export function refreshAccessToken(token) {
-  return function (dispatch) {
-    dispatch({
-      type: NEW_ACCESS_TOKEN_REQUEST,
-    });
-    fetch(`${API_URL}token`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        token: token,
       }),
     }).then(_checkResponse);
   };

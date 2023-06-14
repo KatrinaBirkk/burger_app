@@ -32,3 +32,9 @@
   position: absolute;
   text-align: center;
 }
+
+.prodTitle {
+  text-decoration: none;
+  color: #f2f2f3;
+  cursor: pointer;
+}

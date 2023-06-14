@@ -6,6 +6,9 @@ import {
   UPDATE_INFO_REQUEST,
   UPDATE_INFO_SUCCESS,
   UPDATE_INFO_FAILED,
+  NEW_ACCESS_TOKEN_REQUEST,
+  NEW_ACCESS_TOKEN_SUCCESS,
+  NEW_ACCESS_TOKEN_FAILED,
 } from "../actions/userInfo";
 
 const initialState = {
@@ -72,6 +75,23 @@ export const getUserInfo = (state = initialState, action) => {
       return {
         ...state,
         updateInfoRequest: false,
+      };
+    }
+    case NEW_ACCESS_TOKEN_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case NEW_ACCESS_TOKEN_SUCCESS: {
+      return {
+        ...state,
+        accessToken: action.accessToken,
+        refreshToken: action.refreshToken,
+      };
+    }
+    case NEW_ACCESS_TOKEN_FAILED: {
+      return {
+        ...state,
       };
     }
     default: {

@@ -14,7 +14,7 @@ function RegisterPage() {
   const [form, setValue] = useState({ name: "", email: "", password: "" });
 
   const handleClick = () => {
-    dispatch(registerUser(form.email, form.password, form.name));
+    dispatch(registerUser(form.name, form.email, form.password));
   };
   const onChange = (e) => {
     setValue({ ...form, [e.target.name]: e.target.value });

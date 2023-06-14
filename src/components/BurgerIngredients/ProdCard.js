@@ -6,17 +6,19 @@ import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { useDrag } from "react-dnd";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const ProdCard = ({ ...item }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
-  function openModal() {
-    setIsOpen(true);
-  }
+  // function openModal() {
+  //   setIsOpen(true);
+  // }
 
-  function closeModal() {
-    setIsOpen(false);
-  }
+  // function closeModal() {
+  //   setIsOpen(false);
+  // }
 
   const [{ opacity }, ref] = useDrag({
     type: "ingredients",
@@ -26,9 +28,12 @@ const ProdCard = ({ ...item }) => {
     }),
   });
 
+  const location = useLocation();
+  console.log(location);
+
   return (
     <>
-      {isOpen ? (
+      {/* {isOpen ? (
         <Modal
           // open={isOpen}
           onClose={closeModal}
@@ -36,9 +41,15 @@ const ProdCard = ({ ...item }) => {
         >
           <IngredientDetails data={item} />
         </Modal>
-      ) : null}
-      <div style={{ opacity }}>
-        <div className={styles.prodCard} onClick={openModal}>
+      ) : null} */}
+      <Link
+        style={{ opacity }}
+        className={styles.prodTitle}
+        to={{ pathname: `ingredients/${item._id}` }}
+        state={{ background: location }}
+        replace={true}
+      >
+        <div className={styles.prodCard}>
           <img
             ref={ref}
             className={styles.cardPicture}
@@ -52,7 +63,7 @@ const ProdCard = ({ ...item }) => {
           <Counter number={item.counter} />
           <p className="text text_type_main-default">{item.name}</p>
         </div>
-      </div>
+      </Link>
     </>
   );
 };

@@ -28,3 +28,7 @@
   margin: 0;
   line-height: 64px;
 }
+
+.button {
+  cursor: pointer;
+}
