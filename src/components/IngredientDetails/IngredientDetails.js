@@ -7,13 +7,9 @@ const IngredientDetails = (items) => {
   const classNameDetails = styles.ingredientDetails;
   const classNameTable = styles.ingredientDetailsTable;
 
-  console.log(items.items);
-
   const { id } = useParams();
-  console.log(id);
 
   const item = items.items.find((item) => item._id === id);
-  console.log(item);
 
   return (
     <div className={classNameDetails}>

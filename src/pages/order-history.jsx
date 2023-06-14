@@ -8,7 +8,6 @@ function OrderHistoryPage() {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("RToken");
-  console.log(token);
 
   const handleClick = () => {
     dispatch(logout(token));

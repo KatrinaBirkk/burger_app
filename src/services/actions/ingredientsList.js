@@ -40,9 +40,7 @@ export function getOrderNumber(info) {
           });
         }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
 }
 
