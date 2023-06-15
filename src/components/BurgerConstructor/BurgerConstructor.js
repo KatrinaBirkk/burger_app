@@ -72,6 +72,7 @@ const BurgerConstructor = () => {
       moveIngredientBun(item);
     } else {
       moveIngredientMain(item);
+      // localStorage.setItem("ingredients", ingredients);
     }
   };
 
