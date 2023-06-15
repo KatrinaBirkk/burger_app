@@ -1,0 +1,51 @@
+.container {
+  margin: auto;
+  display: flex;
+  height: 88px;
+  top: 40px;
+  box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04),
+    0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04),
+    0px 0px 1px rgba(0, 0, 0, 0.04);
+}
+
+.navMenu {
+  margin: auto;
+  margin-top: 16px;
+  display: grid;
+  width: 1280px;
+  height: 56px;
+  grid-template-columns: 178px 178px 730px 178px;
+  align-items: center;
+  justify-content: space-between;
+}
+.button_inactive {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  line-height: 24px;
+  color: #8585ad;
+  width: 190px;
+  height: 56px;
+  align-items: center;
+  padding: 16px 10px;
+  gap: 8px;
+}
+
+.button_active {
+  color: #f2f2f3;
+  display: flex;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  line-height: 24px;
+  width: 190px;
+  height: 56px;
+  align-items: center;
+  padding: 16px 10px;
+  gap: 8px;
+}
+
+.logoPicture {
+  margin-left: 112px;
+}

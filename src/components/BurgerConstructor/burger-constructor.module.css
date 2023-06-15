@@ -1,0 +1,80 @@
+.burgerConstructor {
+  margin-top: 100px;
+  height: 912px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  gap: 40px;
+}
+
+.constructorBunElement {
+  /* width: 569px; */
+  display: flex;
+  justify-content: end;
+}
+
+.constructorMainField {
+  display: flex;
+  min-width: 580px;
+  flex-direction: column;
+  align-items: end;
+  gap: 16px;
+}
+
+.constructorMainElement {
+  width: 568px;
+  height: 464px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.constructorTopIngredient {
+  height: 80px;
+  width: 568px;
+  background: #1c1c21;
+  border-radius: 88px 88px 40px 40px;
+}
+
+.constructorBottomIngredient {
+  height: 80px;
+  width: 568px;
+  background: #1c1c21;
+  border-radius: 40px 40px 88px 88px;
+}
+
+.ingredientText {
+  /* font-family: "JetBrains Mono"; */
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  padding-top: 28px;
+  margin: 0;
+  color: #f2f2f3;
+}
+
+.container {
+  /* opacity; */
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  width: 568px;
+}
+
+.onHoverTop {
+  border-radius: 88px 88px 40px 40px;
+  box-shadow: 0 0 5px #3c39ec;
+}
+
+.onHoverMiddle {
+  border-radius: 10px;
+  box-shadow: 0 0 5px #3c39ec;
+}
+.onHoverBottom {
+  border-radius: 40px 40px 88px 88px;
+  box-shadow: 0 0 5px #3c39ec;
+}
